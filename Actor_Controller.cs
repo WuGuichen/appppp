@@ -34,6 +34,7 @@ public class Actor_Controller : MonoBehaviour
     
     private bool lockPlanar = false;
     public bool isRoll = false;
+    
 
     void Awake()
     {
@@ -64,6 +65,20 @@ public class Actor_Controller : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        if(camcon.lockState == false)
+        {
+            //anim.SetFloat("forward", pi.Dmag * Mathf.Lerp(anim.GetFloat("forward"),((pi.run) ? runMultiplier : 1.0f), 0.1f));
+            anim.SetFloat("forward", pi.Dmag * Mathf.Lerp(anim.GetFloat("forward"), ((pi.run) ? runMultiplier : 1.0f), 0.5f));
+            anim.SetFloat("right", 0f);
+        }
+        else
+        {
+            Vector3 localDVecz = transform.InverseTransformVector(pi.Dvec);
+            anim.SetFloat("forward", pi.Dvec.z * ((pi.run) ? runMultiplier : 1.0f));
+            anim.SetFloat("right", pi.Dvec.x * ((pi.run) ? runMultiplier : 1.0f));
+        }
+
+        anim.SetBool("defense", pi.defense);
         //anim.SetFloat("forward", pi.Dmag * Mathf.Lerp(anim.GetFloat("forward"),((pi.run) ? runMultiplier : 1.0f), 0.1f));
         anim.SetFloat("forward", pi.Dmag * Mathf.Lerp(anim.GetFloat("forward"), ((pi.run) ? runMultiplier : 1.0f), 0.5f));
         anim.SetBool("defense", pi.defense);
