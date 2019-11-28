@@ -34,7 +34,7 @@ public class Actor_Controller : MonoBehaviour
     
     private bool lockPlanar = false;
     public bool isRoll = false;
-    
+    public bool trackDirection = false;
 
     void Awake()
     {
@@ -122,10 +122,14 @@ public class Actor_Controller : MonoBehaviour
         }
         else
         {
-            print(model.transform.forward);
-            model.transform.forward = transform.forward;
+            //print(model.transform.forward);
+            if (trackDirection == false)
+                model.transform.forward = transform.forward;
+            else
+                model.transform.forward = planarVec.normalized;
             if(!lockPlanar)
                 planarVec  = pi.Dvec* walkSpeed * ((pi.run) ? runMultiplier : 1.0f);
+
         }
         
         
@@ -160,6 +164,7 @@ public class Actor_Controller : MonoBehaviour
         pi.inputEnable = false;
         lockPlanar = true;
         thrustVec = new Vector3(0, jumpVelocity, 0);
+        trackDirection = true;
     }
 
     private void OnJumpExit()
@@ -184,6 +189,7 @@ public class Actor_Controller : MonoBehaviour
         lockPlanar = false;
         canAttack = true;
         col.material = frictionOne;
+        trackDirection = false;
     }
 
     public void OnGroungExit()
@@ -201,6 +207,7 @@ public class Actor_Controller : MonoBehaviour
     {
         isRoll = true;
         pi.inputEnable = false;
+        trackDirection = true;
         //float x = rigid.velocity.x / (Mathf.Sqrt(rigid.velocity.x * rigid.velocity.x + rigid.velocity.z * rigid.velocity.z * rigid.velocity.z));
         //float z = rigid.velocity.z / (Mathf.Sqrt(rigid.velocity.x * rigid.velocity.x + rigid.velocity.z * rigid.velocity.z * rigid.velocity.z));
         //rigid.velocity *= 12f; 
