@@ -69,7 +69,15 @@ public class Actor_Controller : MonoBehaviour
         anim.SetBool("defense", pi.defense);
         if(pi.roll)
         {
-            planarVec1 = model.transform.forward * walkSpeed * rollVelocity;
+            if (pi.Dmag <= 0.1f)
+                planarVec1 = model.transform.forward * walkSpeed * rollVelocity;
+            else
+            {
+                float x = rigid.velocity.x / (Mathf.Sqrt((rigid.velocity.x * rigid.velocity.x) + (rigid.velocity.z * rigid.velocity.z)));
+                float z = rigid.velocity.z / (Mathf.Sqrt((rigid.velocity.x * rigid.velocity.x) + (rigid.velocity.z * rigid.velocity.z)));
+                planarVec1 = new Vector3(x,0,z) * walkSpeed * rollVelocity;
+                
+            }
             anim.SetTrigger("roll");
             print(pi.roll);
             canAttack = false;
@@ -86,14 +94,23 @@ public class Actor_Controller : MonoBehaviour
 
         if (pi.attack && CheckState("ground") && canAttack)
             anim.SetTrigger("attack");
-
-        if (pi.Dmag > 0.1f)
+        if (!camcon.lockState)
         {
-            model.transform.forward = Vector3.Slerp(model.transform.forward, pi.Dvec, 0.3f); ;
+            if (pi.Dmag > 0.1f)
+            {
+                model.transform.forward = Vector3.Slerp(model.transform.forward, pi.Dvec, 0.3f); ;
+            }
+            if (!lockPlanar)
+            {
+                planarVec = pi.Dmag * model.transform.forward * walkSpeed * ((pi.run) ? runMultiplier : 1.0f);
+            }
         }
-        if (!lockPlanar)
+        else
         {
-            planarVec = pi.Dmag * model.transform.forward * walkSpeed * ((pi.run) ? runMultiplier : 1.0f);
+            print(model.transform.forward);
+            model.transform.forward = transform.forward;
+            if(!lockPlanar)
+                planarVec  = pi.Dvec* walkSpeed * ((pi.run) ? runMultiplier : 1.0f);
         }
         
         
@@ -107,7 +124,8 @@ public class Actor_Controller : MonoBehaviour
         if(!isRoll)
             rigid.velocity = new Vector3(planarVec.x, rigid.velocity.y, planarVec.z) + thrustVec;
         else
-            rigid.velocity = new Vector3(planarVec1.x, rigid.velocity.y, planarVec1.z) + thrustVec;
+            rigid.velocity = new Vector3(planarVec1.x, rigid.velocity.y, planarVec1.z);
+        //print(rigid.velocity);
         thrustVec = Vector3.zero;
         deltaPos = Vector3.zero;
 
@@ -178,7 +196,9 @@ public class Actor_Controller : MonoBehaviour
     public void OnRollExit()
     {
         isRoll = false;
+        rigid.velocity = Vector3.zero;
         pi.inputEnable = true;
+        
     }
 
     public void OnJabEnter()
