@@ -14,7 +14,8 @@ public class KeyboardInput : IUserInputer
     public string keyB;
     public string keyC;
     public string keyD;
-    //public string keyE;
+    public string keyE;
+    
 
     public string keyJRight;
     public string keyJLeft;
@@ -34,7 +35,7 @@ public class KeyboardInput : IUserInputer
     public MyButton KeyB = new MyButton();
     public MyButton KeyC = new MyButton();
     public MyButton KeyD = new MyButton();
-    //public MyButton KeyE = new MyButton();
+    public MyButton KeyE = new MyButton();
 
 
 
@@ -54,7 +55,7 @@ public class KeyboardInput : IUserInputer
         KeyB.Tick(Input.GetButton(keyB));
         KeyC.Tick(Input.GetButton(keyC));
         KeyD.Tick(Input.GetButton(keyD));
-        //KeyE.Tick(Input.GetButton(keyE));
+        KeyE.Tick(Input.GetButton(keyE));
 
 
 
@@ -96,6 +97,7 @@ public class KeyboardInput : IUserInputer
         //print(roll);
         attack = KeyC.onPressed && !defense;
         defense = KeyD.isPressing && inputEnable;
+        lockon = KeyE.onPressed;
     }
 
    

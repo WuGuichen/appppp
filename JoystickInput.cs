@@ -19,6 +19,7 @@ public class JoystickInput : IUserInputer
     public string btnLB = "LB";
     public string btnRB = "RB";
 
+
     public MyButton buttonA = new MyButton();
     public MyButton buttonB = new MyButton();
     public MyButton buttonC = new MyButton();
@@ -74,6 +75,7 @@ public class JoystickInput : IUserInputer
         //print(roll);
         attack = buttonAL.onPressed && !defense;
         defense = buttonAR.isPressing && inputEnable;
+        lockon = buttonAR.onPressed;
 
     }
 

@@ -12,12 +12,16 @@ public class CameraController : MonoBehaviour
 
     private GameObject playerHandle;
     private GameObject cameraHandle;
-    private GameObject modle;
+    private GameObject model;
     private GameObject _camera;
+    
     private float tempEulerX;
+    [SerializeField]
+    private GameObject lockTarget;
 
     private Vector3 cameraDampVelocity;
 
+    int i = 0;
     void Awake()
     {
         IUserInputer[] inputs = GetComponentsInParent<IUserInputer>();
@@ -33,7 +37,7 @@ public class CameraController : MonoBehaviour
         cameraHandle = transform.parent.gameObject;
         playerHandle = cameraHandle.transform.parent.gameObject;
         Actor_Controller ac = playerHandle.GetComponent<Actor_Controller>();
-        modle = ac.modle;
+        model = ac.model;
         
         print("camera" + pi);
 
@@ -50,20 +54,51 @@ public class CameraController : MonoBehaviour
     void FixedUpdate()
     {
 
-        Vector3 tempModelEuler = modle.transform.eulerAngles;
+        Vector3 tempModelEuler = model.transform.eulerAngles;
         playerHandle.transform.Rotate(Vector3.up, pi.Jright * horizontalSpeed * Time.fixedDeltaTime);
         //cameraHandle.transform.Rotate(Vector3.right, pi.Jup * -verticalSpeed * Time.deltaTime);
         //print("camera" + pi.Jup);
 
-        tempEulerX -= pi.Jup * -verticalSpeed * Time.fixedDeltaTime;
+        tempEulerX -= -pi.Jup * -verticalSpeed * Time.fixedDeltaTime;
         tempEulerX = Mathf.Clamp(tempEulerX, -70, 70);
 
         cameraHandle.transform.localEulerAngles = new Vector3(tempEulerX, 0, 0);
 
-        modle.transform.eulerAngles = tempModelEuler;
+        model.transform.eulerAngles = tempModelEuler;
 
         _camera.transform.position = Vector3.SmoothDamp(_camera.transform.position, transform.position, ref cameraDampVelocity, cameraDampVelue);
         //camera.transform.eulerAngles = transform.eulerAngles;
         _camera.transform.LookAt(cameraHandle.transform);
+    }
+
+    public void LockUnlock()
+    {
+        //print("Lockunlock");
+        //try to lock
+        Vector3 modelOrigin1 = this.model.transform.position;
+        Vector3 modelOrigin2 = modelOrigin1 + new Vector3(0, 1, 0);  //从脚下origin到中点
+        Vector3 boxCenter = modelOrigin2 + model.transform.forward * 5.0f;
+        Collider[] cols = Physics.OverlapBox(boxCenter, new Vector3(0.5f, 0.5f, 5.0f), model.transform.rotation, LayerMask.GetMask("Enemy"));
+
+        lockTarget = null;
+        if (cols.Length>0)
+        {
+            if (cols[i] != null && i < cols.Length)
+            {
+                lockTarget = cols[i].gameObject;
+                i += 1;
+                print(lockTarget);
+                if (i == cols.Length)
+                {
+                    i = 0;
+                    //lockTarget = cols[i].gameObject;
+                    print("replay");
+                }
+            }
+            
+        }
+        
+        
+        
     }
 }

@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Actor_Controller : MonoBehaviour
 {
-    public GameObject modle;
+    public GameObject model;
+    public CameraController camcon;
     public IUserInputer pi;
     
     public float walkSpeed;
@@ -37,7 +38,7 @@ public class Actor_Controller : MonoBehaviour
     void Awake()
     {
         
-        anim = modle.GetComponent<Animator>();
+        anim = model.GetComponent<Animator>();
         IUserInputer[] inputs = GetComponents<IUserInputer>();
         foreach (var input in inputs)
         {
@@ -55,6 +56,10 @@ public class Actor_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(pi.lockon)
+        {
+            camcon.LockUnlock();
+        }
         if (Input.GetKeyDown(KeyCode.E))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -64,7 +69,7 @@ public class Actor_Controller : MonoBehaviour
         anim.SetBool("defense", pi.defense);
         if(pi.roll)
         {
-            planarVec1 = modle.transform.forward * walkSpeed * rollVelocity;
+            planarVec1 = model.transform.forward * walkSpeed * rollVelocity;
             anim.SetTrigger("roll");
             print(pi.roll);
             canAttack = false;
@@ -84,11 +89,11 @@ public class Actor_Controller : MonoBehaviour
 
         if (pi.Dmag > 0.1f)
         {
-            modle.transform.forward = Vector3.Slerp(modle.transform.forward, pi.Dvec, 0.3f); ;
+            model.transform.forward = Vector3.Slerp(model.transform.forward, pi.Dvec, 0.3f); ;
         }
         if (!lockPlanar)
         {
-            planarVec = pi.Dmag * modle.transform.forward * walkSpeed * ((pi.run) ? runMultiplier : 1.0f);
+            planarVec = pi.Dmag * model.transform.forward * walkSpeed * ((pi.run) ? runMultiplier : 1.0f);
         }
         
         
@@ -185,7 +190,7 @@ public class Actor_Controller : MonoBehaviour
 
     public void OnJabUpdate()
     {
-        thrustVec = modle.transform.forward * anim.GetFloat("jabVelocity");
+        thrustVec = model.transform.forward * anim.GetFloat("jabVelocity");
     }
 
     
@@ -213,7 +218,7 @@ public class Actor_Controller : MonoBehaviour
 
     public void OnAttack1hAUpdate()
     {
-        thrustVec = modle.transform.forward * anim.GetFloat("attack1hAVelocity");
+        thrustVec = model.transform.forward * anim.GetFloat("attack1hAVelocity");
         float currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("attack"));
         currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.3f);
         anim.SetLayerWeight(anim.GetLayerIndex("attack"), currentWeight);
