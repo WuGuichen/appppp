@@ -14,6 +14,7 @@ public class Actor_Controller : MonoBehaviour
     public float jumpVelocity = 3.0f;
     public float rollVelocity = 1.0f;
     public float jabVelocity = 3.0f;
+    
 
     [Space(10)]
     [Header("===== Friction Setting =====")]
@@ -70,6 +71,7 @@ public class Actor_Controller : MonoBehaviour
             //anim.SetFloat("forward", pi.Dmag * Mathf.Lerp(anim.GetFloat("forward"),((pi.run) ? runMultiplier : 1.0f), 0.1f));
             anim.SetFloat("forward", pi.Dmag * Mathf.Lerp(anim.GetFloat("forward"), ((pi.run) ? runMultiplier : 1.0f), 0.5f));
             anim.SetFloat("right", 0f);
+            anim.SetFloat("Vec", anim.GetFloat("forward"));
         }
         else
         {
@@ -77,10 +79,12 @@ public class Actor_Controller : MonoBehaviour
             //anim.SetFloat("forward", pi.Dvec.z * ((pi.run) ? runMultiplier : 1.0f));
             anim.SetFloat("forward", pi.Dvec.z * ((pi.run) ? runMultiplier : 1.0f));
             anim.SetFloat("right", pi.Dvec.x * ((pi.run) ? runMultiplier : 1.0f));
-            print(pi.Dvec.z);
+            anim.SetFloat("Vec", rigid.velocity.magnitude);
+            //print(pi.Dvec.z);
             //print((pi.run) ? runMultiplier : 1.0f);
         }
 
+        
         anim.SetBool("defense", pi.defense);
         //anim.SetFloat("forward", pi.Dmag * Mathf.Lerp(anim.GetFloat("forward"),((pi.run) ? runMultiplier : 1.0f), 0.1f));
         //anim.SetFloat("forward", pi.Dmag * Mathf.Lerp(anim.GetFloat("forward"), ((pi.run) ? runMultiplier : 1.0f), 0.5f));
@@ -98,7 +102,7 @@ public class Actor_Controller : MonoBehaviour
 
             }
             anim.SetTrigger("roll");
-            print(pi.roll);
+            //print(pi.roll);
             canAttack = false;
             //pi.inputEnable = false;
             
@@ -196,6 +200,7 @@ public class Actor_Controller : MonoBehaviour
         canAttack = true;
         col.material = frictionOne;
         trackDirection = false;
+        
     }
 
     public void OnGroungExit()
@@ -224,7 +229,7 @@ public class Actor_Controller : MonoBehaviour
     public void OnRollExit()
     {
         isRoll = false;
-        rigid.velocity = Vector3.zero;
+        
         pi.inputEnable = true;
         
     }

@@ -89,6 +89,13 @@ public class CameraController : MonoBehaviour
         if (lockTarget != null)
         {
             lockDot.rectTransform.position = Camera.main.WorldToScreenPoint(lockTarget.obj.transform.position + new Vector3(0, lockTarget.halfHeight, 0));
+            if (Vector3.Distance(model.transform.position, lockTarget.obj.transform.position) > 10.0f)
+            {
+                lockTarget = null;
+                lockDot.enabled = false;
+                lockState = false;
+            }
+              
         }
     }
 
