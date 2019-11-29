@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     
     private float tempEulerX;
     [SerializeField]
-    private GameObject lockTarget;
+    private LockTarget lockTarget;
 
     private Vector3 cameraDampVelocity;
 
@@ -73,14 +73,23 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            Vector3 tempForward = lockTarget.transform.position - model.transform.position;
+            Vector3 tempForward = lockTarget.obj.transform.position - model.transform.position;
             tempForward.y = 0;
             playerHandle.transform.forward = tempForward;
+            cameraHandle.transform.LookAt(lockTarget.obj.transform);
         }
 
         _camera.transform.position = Vector3.SmoothDamp(_camera.transform.position, transform.position, ref cameraDampVelocity, cameraDampVelue);
         //camera.transform.eulerAngles = transform.eulerAngles;
         _camera.transform.LookAt(cameraHandle.transform);
+    }
+
+    private void Update()
+    {
+        if (lockTarget != null)
+        {
+            lockDot.rectTransform.position = Camera.main.WorldToScreenPoint(lockTarget.obj.transform.position + new Vector3(0, lockTarget.halfHeight, 0));
+        }
     }
 
     public void LockUnlock()
@@ -102,27 +111,23 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            lockDot.enabled = true;
-            lockState = true;
-            //print("cols[0]"+cols[0]);
-            //print("i="+i);
-            if (i < cols.Length && cols[0] != lockTarget)
+            foreach (var col in cols)
             {
-                lockTarget = cols[i].gameObject;
-                i += 1;
-                //print(lockTarget);
-                if (i >= cols.Length)
+                if (lockTarget != null && lockTarget.obj == col.gameObject)
                 {
-                    i = 0;
-                    //lockTarget = cols[i].gameObject;
-                    print("replay");
+                    lockTarget = null;
+                    lockDot.enabled = false;
+                    lockState = false;
+                    break;
                 }
+                lockTarget = new LockTarget(col.gameObject, col.bounds.extents.y);
+                lockDot.enabled = true;
+                lockState = true;
+                break;
             }
-            else
-            {
-                i = 0;
-                lockTarget = cols[0].gameObject;
-            }
+            
+            
+            
             
 
         }
@@ -130,4 +135,19 @@ public class CameraController : MonoBehaviour
         
         
     }
+
+    private class LockTarget
+    {
+        public GameObject obj;
+        public float halfHeight;
+
+        public LockTarget(GameObject _obj, float _halfHeight)
+        {
+            obj = _obj;
+            halfHeight = _halfHeight;
+        }
+
+    }
+        
+
 }

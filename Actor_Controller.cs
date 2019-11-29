@@ -74,13 +74,16 @@ public class Actor_Controller : MonoBehaviour
         else
         {
             Vector3 localDVecz = transform.InverseTransformVector(pi.Dvec);
+            //anim.SetFloat("forward", pi.Dvec.z * ((pi.run) ? runMultiplier : 1.0f));
             anim.SetFloat("forward", pi.Dvec.z * ((pi.run) ? runMultiplier : 1.0f));
             anim.SetFloat("right", pi.Dvec.x * ((pi.run) ? runMultiplier : 1.0f));
+            print(pi.Dvec.z);
+            //print((pi.run) ? runMultiplier : 1.0f);
         }
 
         anim.SetBool("defense", pi.defense);
         //anim.SetFloat("forward", pi.Dmag * Mathf.Lerp(anim.GetFloat("forward"),((pi.run) ? runMultiplier : 1.0f), 0.1f));
-        anim.SetFloat("forward", pi.Dmag * Mathf.Lerp(anim.GetFloat("forward"), ((pi.run) ? runMultiplier : 1.0f), 0.5f));
+        //anim.SetFloat("forward", pi.Dmag * Mathf.Lerp(anim.GetFloat("forward"), ((pi.run) ? runMultiplier : 1.0f), 0.5f));
         anim.SetBool("defense", pi.defense);
         if(pi.roll)
         {
@@ -88,10 +91,11 @@ public class Actor_Controller : MonoBehaviour
                 planarVec1 = model.transform.forward * walkSpeed * rollVelocity;
             else
             {
-                float x = rigid.velocity.x / (Mathf.Sqrt((rigid.velocity.x * rigid.velocity.x) + (rigid.velocity.z * rigid.velocity.z)));
-                float z = rigid.velocity.z / (Mathf.Sqrt((rigid.velocity.x * rigid.velocity.x) + (rigid.velocity.z * rigid.velocity.z)));
-                planarVec1 = new Vector3(x,0,z) * walkSpeed * rollVelocity;
-                
+                //float x = rigid.velocity.x / (Mathf.Sqrt((rigid.velocity.x * rigid.velocity.x) + (rigid.velocity.z * rigid.velocity.z)));
+                //float z = rigid.velocity.z / (Mathf.Sqrt((rigid.velocity.x * rigid.velocity.x) + (rigid.velocity.z * rigid.velocity.z)));
+                //planarVec1 = new Vector3(x,0,z) * walkSpeed * rollVelocity;
+                planarVec1 = rigid.velocity.normalized * walkSpeed * rollVelocity;
+
             }
             anim.SetTrigger("roll");
             print(pi.roll);
@@ -123,12 +127,14 @@ public class Actor_Controller : MonoBehaviour
         else
         {
             //print(model.transform.forward);
-            if (trackDirection == false)
+            if (trackDirection == false)    //不让追踪，面向前
                 model.transform.forward = transform.forward;
             else
-                model.transform.forward = planarVec.normalized;
-            if(!lockPlanar)
-                planarVec  = pi.Dvec* walkSpeed * ((pi.run) ? runMultiplier : 1.0f);
+                model.transform.forward = planarVec.normalized;  //单位化而不改变
+            if (!lockPlanar)
+            {
+                planarVec = pi.Dvec * walkSpeed * ((pi.run) ? runMultiplier : 1.0f);
+            }
 
         }
         
