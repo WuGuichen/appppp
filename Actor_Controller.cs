@@ -29,7 +29,7 @@ public class Actor_Controller : MonoBehaviour
     private Vector3 thrustVec;
     private bool canAttack;
     private CapsuleCollider col;
-    private float lerpTarget;   //0, 1
+    //private float lerpTarget;   //0, 1
     private Vector3 deltaPos;
 
     
@@ -115,7 +115,7 @@ public class Actor_Controller : MonoBehaviour
             canAttack = false;
         }
 
-        if (pi.attack && CheckState("ground") && canAttack)
+        if (pi.attack && (CheckState("ground") || CheckStateTag("attack")) && canAttack)
             anim.SetTrigger("attack");
         if (!camcon.lockState)
         {
@@ -164,6 +164,13 @@ public class Actor_Controller : MonoBehaviour
     {
         return anim.GetCurrentAnimatorStateInfo(anim.GetLayerIndex(layerName)).IsName(stateName);
     }
+
+    public bool CheckStateTag(string tagName, string layerName = "Base Layer")
+    {
+        return anim.GetCurrentAnimatorStateInfo(anim.GetLayerIndex(layerName)).IsTag(tagName);
+    }
+
+
     /// <summary>
     /// Message Processing Block
     /// </summary>
@@ -248,39 +255,25 @@ public class Actor_Controller : MonoBehaviour
 
     
 
-    public void OnAttackIdleEnter()
-    {
-        pi.inputEnable = true;
-        //lockPlanar = false;
-        //anim.SetLayerWeight(anim.GetLayerIndex("attack"), 0f);
-        lerpTarget = 0f;
-    }
-    public void OnAttackIdleUpdate()
-    {
-        float currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("attack"));
-        currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.3f);
-        anim.SetLayerWeight(anim.GetLayerIndex("attack"), currentWeight);
-    }
-
     public void OnAttack1hAEnter()
     {
         pi.inputEnable = false;
         //lockPlanar = true;
-        lerpTarget = 1.0f;
+        //lerpTarget = 1.0f;
     }
 
     public void OnAttack1hAUpdate()
     {
         thrustVec = model.transform.forward * anim.GetFloat("attack1hAVelocity");
-        float currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("attack"));
-        currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.3f);
-        anim.SetLayerWeight(anim.GetLayerIndex("attack"), currentWeight);
+        //float currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("attack"));
+        //currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.3f);
+        //anim.SetLayerWeight(anim.GetLayerIndex("attack"), currentWeight);
     }
 
     public void OnUpdateRM(object _deltaPos) //_ 说明是区域变量
     {
         //print(_deltaPos);
-        if(CheckState("attack1hC", "attack"))
+        if(CheckState("attack1hC"))
             deltaPos += (0.2f*deltaPos + 0.8f*(Vector3)_deltaPos)/1.0f;
     }
 
