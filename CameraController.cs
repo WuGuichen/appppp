@@ -26,23 +26,15 @@ public class CameraController : MonoBehaviour
     private Vector3 cameraDampVelocity;
 
     int i = 0;
-    void Awake()
+    void Start()
     {
-        IUserInputer[] inputs = GetComponentsInParent<IUserInputer>();
-        foreach (var input in inputs)
-        {
-            if (input.enabled == true)
-            {
-                pi = input;
-                //print(pi);
-                break;
-            }
-        }
+        
         cameraHandle = transform.parent.gameObject;
         playerHandle = cameraHandle.transform.parent.gameObject;
         Actor_Controller ac = playerHandle.GetComponent<Actor_Controller>();
         model = ac.model;
         tempEulerX = 20;
+        pi = ac.pi;
 
         if (!isAI)
         {
@@ -117,7 +109,7 @@ public class CameraController : MonoBehaviour
         Vector3 modelOrigin1 = this.model.transform.position;
         Vector3 modelOrigin2 = modelOrigin1 + new Vector3(0, 1, 0);  //从脚下origin到中点
         Vector3 boxCenter = modelOrigin2 + model.transform.forward * 5.0f;
-        Collider[] cols = Physics.OverlapBox(boxCenter, new Vector3(0.5f, 0.5f, 5.0f), model.transform.rotation, LayerMask.GetMask("Enemy"));
+        Collider[] cols = Physics.OverlapBox(boxCenter, new Vector3(0.5f, 0.5f, 5.0f), model.transform.rotation, LayerMask.GetMask(isAI?"Player":"Enemy"));
         //print("lenth"+cols.Length);
         
         if (cols.Length == 0)
