@@ -41,9 +41,9 @@ public class KeyboardInput : IUserInputer
     public MyButton KeyC = new MyButton();
     public MyButton KeyD = new MyButton();
     public MyButton KeyE = new MyButton();
-    public MyButton KeyF = new MyButton();
+    public MyButton KeyF_LeftMouse = new MyButton();
     public MyButton KeyG = new MyButton();
-    public MyButton KeyH = new MyButton();
+    public MyButton KeyH_RightMouse = new MyButton();
     public MyButton KeyI = new MyButton();
 
 
@@ -66,9 +66,9 @@ public class KeyboardInput : IUserInputer
         KeyC.Tick(Input.GetButton(keyC));
         KeyD.Tick(Input.GetButton(keyD));
         KeyE.Tick(Input.GetButton(keyE));
-        KeyF.Tick(Input.GetButton(keyF));
+        KeyF_LeftMouse.Tick(Input.GetButton(keyF));
         KeyG.Tick(Input.GetButton(keyG));
-        KeyH.Tick(Input.GetButton(keyH));
+        KeyH_RightMouse.Tick(Input.GetButton(keyH));
         KeyI.Tick(Input.GetButton(keyI));
 
 
@@ -108,13 +108,12 @@ public class KeyboardInput : IUserInputer
         run = (KeyA.isPressing && !KeyA.IsDelaying) || (run&&KeyA.IsExtending);
         jump = run && KeyA.onPressed;
         roll = KeyA.OnReleased && KeyA.IsDelaying;
-        //print(roll);
-        //attack = KeyC.onPressed && !defense;
-        rb = KeyF.onPressed;
+        defense = KeyH_RightMouse.isPressing;
+        rb = KeyF_LeftMouse.onPressed;
         rt = KeyG.onPressed;
-        lb = KeyH.onPressed;
+        lb = KeyH_RightMouse.onPressed;
         lt = KeyI.onPressed;
-        defense = KeyD.isPressing && inputEnable;
+        
         lockon = KeyE.onPressed;
     }
 
