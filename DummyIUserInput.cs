@@ -9,14 +9,9 @@ public class DummyIUserInput : IUserInputer
     {
         while (true)
         {
-            Dup = 1.0f;
-            Dright = 0f;
-            Jright = 9.0f;
-            Jup = 0;
-            run = true;
-            yield return new WaitForSeconds(2.0f);
+            
             rb = true;
-            yield return new WaitForSeconds(1.0f);
+            yield return 0;
 
 
         }

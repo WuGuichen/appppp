@@ -310,6 +310,7 @@ public class Actor_Controller : MonoBehaviour
     public void OnHitEnter()
     {
         pi.inputEnable = false;
+        
     }
 
 }
