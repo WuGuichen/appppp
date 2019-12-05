@@ -307,5 +307,9 @@ public class Actor_Controller : MonoBehaviour
             deltaPos += (0.2f*deltaPos + 0.8f*(Vector3)_deltaPos)/1.0f;
     }
 
+    public void OnHitEnter()
+    {
+        pi.inputEnable = false;
+    }
 
 }
