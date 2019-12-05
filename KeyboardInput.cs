@@ -15,7 +15,12 @@ public class KeyboardInput : IUserInputer
     public string keyC;
     public string keyD;
     public string keyE;
-    
+    public string keyF;
+    public string keyG;
+    public string keyH;
+    public string keyI;
+
+
 
     public string keyJRight;
     public string keyJLeft;
@@ -36,6 +41,10 @@ public class KeyboardInput : IUserInputer
     public MyButton KeyC = new MyButton();
     public MyButton KeyD = new MyButton();
     public MyButton KeyE = new MyButton();
+    public MyButton KeyF = new MyButton();
+    public MyButton KeyG = new MyButton();
+    public MyButton KeyH = new MyButton();
+    public MyButton KeyI = new MyButton();
 
 
 
@@ -51,11 +60,16 @@ public class KeyboardInput : IUserInputer
         KeyDown.Tick(Input.GetButton(keyDown));
         KeyLeft.Tick(Input.GetButton(keyLeft));
         KeyRight.Tick(Input.GetButton(keyRight));
+
         KeyA.Tick(Input.GetButton(keyA));
         KeyB.Tick(Input.GetButton(keyB));
         KeyC.Tick(Input.GetButton(keyC));
         KeyD.Tick(Input.GetButton(keyD));
         KeyE.Tick(Input.GetButton(keyE));
+        KeyF.Tick(Input.GetButton(keyF));
+        KeyG.Tick(Input.GetButton(keyG));
+        KeyH.Tick(Input.GetButton(keyH));
+        KeyI.Tick(Input.GetButton(keyI));
 
 
 
@@ -95,7 +109,11 @@ public class KeyboardInput : IUserInputer
         jump = run && KeyA.onPressed;
         roll = KeyA.OnReleased && KeyA.IsDelaying;
         //print(roll);
-        attack = KeyC.onPressed && !defense;
+        //attack = KeyC.onPressed && !defense;
+        rb = KeyF.onPressed;
+        rt = KeyG.onPressed;
+        lb = KeyH.onPressed;
+        lt = KeyI.onPressed;
         defense = KeyD.isPressing && inputEnable;
         lockon = KeyE.onPressed;
     }

@@ -32,6 +32,7 @@ public class Actor_Controller : MonoBehaviour
     //private float lerpTarget;   //0, 1
     private Vector3 deltaPos;
 
+    private bool leftIsShield = true;
     
     private bool lockPlanar = false;
     public bool isRoll = false;
@@ -115,8 +116,19 @@ public class Actor_Controller : MonoBehaviour
             canAttack = false;
         }
 
-        if (pi.attack && (CheckState("ground") || CheckStateTag("attack")) && canAttack)
+        if ((pi.rb || pi.lb) && (CheckState("ground") || CheckStateTag("attack")) && canAttack)
+        {
+            if (pi.rb)
+            {
+                anim.SetBool("R0L1", false);
+            }
+            else
+            {
+                anim.SetBool("R0L1", true);
+            }
             anim.SetTrigger("attack");
+        }
+        
         if (!camcon.lockState)
         {
             if (pi.Dmag > 0.1f)
@@ -141,10 +153,6 @@ public class Actor_Controller : MonoBehaviour
             }
 
         }
-        
-        
-        
-
     }
     private void FixedUpdate()
     {

@@ -17,11 +17,15 @@ public abstract class IUserInputer : MonoBehaviour
     // 2.trigger once signal
     public bool jump;
     protected bool lastJump;
-    public bool attack;
+    //public bool attack;
     protected bool lastAttack;
     public bool defense;
     public bool roll;
     public bool lockon;
+    public bool lb;
+    public bool lt;
+    public bool rb;
+    public bool rt;
     // 3.double triger
 
     [Header("===== Others =====")]

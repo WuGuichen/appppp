@@ -73,7 +73,7 @@ public class JoystickInput : IUserInputer
         jump = run && buttonAL.onPressed;
         roll = buttonA.OnReleased && buttonA.IsDelaying;
         //print(roll);
-        attack = buttonAL.onPressed && !defense;
+        //attack = buttonAL.onPressed && !defense;
         defense = buttonAR.isPressing && inputEnable;
         lockon = buttonAR.onPressed;
 

@@ -1349,10 +1349,13 @@ MonoBehaviour:
   Jright: 0
   run: 0
   jump: 0
-  attack: 0
   defense: 0
   roll: 0
   lockon: 0
+  lb: 0
+  lt: 0
+  rb: 0
+  rt: 0
   inputEnable: 1
   keyUp: w
   keyDown: s
@@ -1363,6 +1366,10 @@ MonoBehaviour:
   keyC: mouse 0
   keyD: mouse 1
   keyE: q
+  keyF: u
+  keyG: i
+  keyH: j
+  keyI: k
   keyJRight: right
   keyJLeft: left
   keyJUp: up
@@ -1461,10 +1468,13 @@ MonoBehaviour:
   Jright: 0
   run: 0
   jump: 0
-  attack: 0
   defense: 0
   roll: 0
   lockon: 0
+  lb: 0
+  lt: 0
+  rb: 0
+  rt: 0
   inputEnable: 1
   axisX: axisX
   axisY: axisY
