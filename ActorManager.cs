@@ -5,12 +5,13 @@ using UnityEngine;
 public class ActorManager : MonoBehaviour
 {
     public BattleManager bm;
-
+    public Actor_Controller ac;
 
 
 
     void Awake()
     {
+        ac = GetComponent<Actor_Controller>();
         GameObject sensor = transform.Find("Sensor").gameObject;
         bm = sensor.GetComponent<BattleManager>();
         if(bm == null)
@@ -24,5 +25,10 @@ public class ActorManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void DoDamage()
+    {
+        ac.Issuetrigger("hit");
     }
 }

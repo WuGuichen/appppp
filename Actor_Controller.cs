@@ -310,7 +310,11 @@ public class Actor_Controller : MonoBehaviour
     public void OnHitEnter()
     {
         pi.inputEnable = false;
-        
+        planarVec = Vector3.zero;
     }
 
+    public void Issuetrigger(string triggerName)
+    {
+        anim.SetTrigger(triggerName);
+    }
 }

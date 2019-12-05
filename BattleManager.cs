@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 public class BattleManager : MonoBehaviour
 {
+    
     public ActorManager am;
     private CapsuleCollider defCol;
 
@@ -19,6 +20,13 @@ public class BattleManager : MonoBehaviour
     }
     private void OnTriggerEnter(Collider col)
     {
-        print(col.name);
+        print(col.tag);
+        if(col.tag == "Weapon")
+        {
+            print(col.name);
+            am.DoDamage();
+        }
     }
+
+    
 }
