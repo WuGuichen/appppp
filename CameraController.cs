@@ -12,6 +12,7 @@ public class CameraController : MonoBehaviour
     public float cameraDampVelue = 0.5f;
     public Image lockDot;          //用image做指示
     public bool lockState;
+    public bool isAI = false;
 
     private GameObject playerHandle;
     private GameObject cameraHandle;
@@ -41,16 +42,14 @@ public class CameraController : MonoBehaviour
         playerHandle = cameraHandle.transform.parent.gameObject;
         Actor_Controller ac = playerHandle.GetComponent<Actor_Controller>();
         model = ac.model;
-        
-        //print("camera" + pi);
-
-
-        _camera = Camera.main.gameObject;
         tempEulerX = 20;
 
-
-        Cursor.lockState = CursorLockMode.Locked;
-        lockDot.enabled = false;
+        if (!isAI)
+        {
+            _camera = Camera.main.gameObject;
+            lockDot.enabled = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
         
     }
 
@@ -79,24 +78,36 @@ public class CameraController : MonoBehaviour
             cameraHandle.transform.LookAt(lockTarget.obj.transform);
         }
 
-        _camera.transform.position = Vector3.SmoothDamp(_camera.transform.position, transform.position, ref cameraDampVelocity, cameraDampVelue);
-        //camera.transform.eulerAngles = transform.eulerAngles;
-        _camera.transform.LookAt(cameraHandle.transform);
+        if (!isAI)   //摄像机跟随
+        {
+            _camera.transform.position = Vector3.SmoothDamp(_camera.transform.position, transform.position, ref cameraDampVelocity, cameraDampVelue);
+            //camera.transform.eulerAngles = transform.eulerAngles;
+            _camera.transform.LookAt(cameraHandle.transform);
+        }
     }
 
     private void Update()
     {
         if (lockTarget != null)
         {
-            lockDot.rectTransform.position = Camera.main.WorldToScreenPoint(lockTarget.obj.transform.position + new Vector3(0, lockTarget.halfHeight, 0));
-            if (Vector3.Distance(model.transform.position, lockTarget.obj.transform.position) > 10.0f)
+            if (!isAI)
             {
-                lockTarget = null;
-                lockDot.enabled = false;
-                lockState = false;
+                lockDot.rectTransform.position = Camera.main.WorldToScreenPoint(lockTarget.obj.transform.position + new Vector3(0, lockTarget.halfHeight, 0));
+            }
+                if (Vector3.Distance(model.transform.position, lockTarget.obj.transform.position) > 10.0f)
+            {
+                LockProcessA(null, false, false, isAI);
             }
               
         }
+    }
+
+    private void LockProcessA(LockTarget _locktaget, bool _lockDotEnable, bool _lockState, bool _isAI)
+    {
+        lockTarget = _locktaget;
+        if(!_isAI)
+            lockDot.enabled = _lockDotEnable;
+        lockState = _lockState;
     }
 
     public void LockUnlock()
@@ -111,9 +122,7 @@ public class CameraController : MonoBehaviour
         
         if (cols.Length == 0)
         {
-            lockTarget = null;
-            lockDot.enabled = false;
-            lockState = false;
+            LockProcessA(null, false, false, isAI);
             i = 0;
         }
         else
@@ -122,14 +131,11 @@ public class CameraController : MonoBehaviour
             {
                 if (lockTarget != null && lockTarget.obj == col.gameObject)
                 {
-                    lockTarget = null;
-                    lockDot.enabled = false;
-                    lockState = false;
+                    LockProcessA(null, false, false, isAI);
                     break;
                 }
-                lockTarget = new LockTarget(col.gameObject, col.bounds.extents.y);
-                lockDot.enabled = true;
-                lockState = true;
+                
+                LockProcessA(new LockTarget(col.gameObject, col.bounds.extents.y), true, true, isAI);
                 break;
             }
             
