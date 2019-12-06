@@ -131,6 +131,26 @@ public class Actor_Controller : MonoBehaviour
             
         }
 
+        // counterBack
+        if (pi.rt || pi.lt && (CheckState("ground") || CheckStateTag("attackR") || CheckStateTag("attackL")) && canAttack)
+        {
+            if (pi.rt)
+            {
+
+            }
+            else
+            {
+                if(!leftIsShield)
+                {
+
+                }
+                else
+                {
+                    anim.SetTrigger("counterBack");
+                }
+            }
+        }
+
 
         if (leftIsShield)
         {
