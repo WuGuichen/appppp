@@ -5,23 +5,31 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     public ActorManager am;
-    public Collider weaponCol;
+    public Collider weaponColL;
+    public Collider weaponColR;
 
     public GameObject whL;
     public GameObject whR;
 
     private void Start()
     {
-        weaponCol = whR.GetComponentInChildren<Collider>();
-        print(transform.DeepFind("weaponHandleL"));
+        whL = transform.DeepFind("weaponHandleL").gameObject;
+        whR = transform.DeepFind("weaponHandleR").gameObject;
+
+        weaponColL = whL.GetComponentInChildren<Collider>();
+        weaponColR = whR.GetComponentInChildren<Collider>();
     }
 
     public void WeaponEnable()
     {
-        weaponCol.enabled = true;
+        if (am.ac.CheckStateTag("attackL"))
+            weaponColL.enabled = true;
+        else
+            weaponColR.enabled = true;
     }
     public void WeaponDisable()
     {
-        weaponCol.enabled = false;
+        weaponColL.enabled = false;
+        weaponColR.enabled = false;
     }
 }

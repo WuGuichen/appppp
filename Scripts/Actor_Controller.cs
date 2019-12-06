@@ -116,7 +116,7 @@ public class Actor_Controller : MonoBehaviour
             canAttack = false;
         }
 
-        if ((pi.rb || pi.lb) && (CheckState("ground") || CheckStateTag("attack")) && canAttack)
+        if ((pi.rb || pi.lb) && (CheckState("ground") || CheckStateTag("attackR") || CheckStateTag("attackL")) && canAttack)
         {
             if (pi.rb)
             {
@@ -316,5 +316,10 @@ public class Actor_Controller : MonoBehaviour
     public void Issuetrigger(string triggerName)
     {
         anim.SetTrigger(triggerName);
+    }
+
+    public void OnAttackExit()
+    {
+        model.SendMessage("WeaponDisable");
     }
 }
