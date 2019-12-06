@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CapsuleCollider))]
-public class BattleManager : MonoBehaviour
+public class BattleManager : IActorManagerInterface
 {
     
-    public ActorManager am;
+    //public ActorManager am;
     private CapsuleCollider defCol;
 
     private void Start()

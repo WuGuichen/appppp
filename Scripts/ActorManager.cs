@@ -17,21 +17,25 @@ public class ActorManager : MonoBehaviour
         ac = GetComponent<Actor_Controller>();
         GameObject model = ac.model;
         GameObject sensor = transform.Find("Sensor").gameObject;
-        
-        bm = sensor.GetComponent<BattleManager>();
-        if(bm == null)
-            bm = sensor.AddComponent<BattleManager>();
-        bm.am = this;
 
-        wm = model.GetComponent<WeaponManager>();
-        if (wm == null)
-            wm = model.AddComponent<WeaponManager>();
-        wm.am = this;
+        bm = Bind<BattleManager>(sensor);
+        wm = Bind<WeaponManager>(model);
+        sm = Bind<StateManager>(gameObject);
+        sm.Test();
+    }
 
-        sm = model.GetComponent<StateManager>();
-        if (sm == null)
-            sm = model.AddComponent<StateManager>();
-        sm.am = this;
+    private T Bind<T>(GameObject go) where T : IActorManagerInterface
+    {
+        T tempInstance;
+        tempInstance = go.GetComponent<T>();
+        if(tempInstance == null)
+        {
+            tempInstance = go.AddComponent<T>();
+
+        }
+        tempInstance.am = this;
+
+        return tempInstance;
     }
 
     // Update is called once per frame

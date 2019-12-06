@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponManager : MonoBehaviour
+public class WeaponManager : IActorManagerInterface
 {
-    public ActorManager am;
+    //public ActorManager am;
     public Collider weaponColL;
     public Collider weaponColR;
 

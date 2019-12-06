@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateManager : MonoBehaviour
+public class StateManager : IActorManagerInterface
 {
-    public ActorManager am;
+    //public ActorManager am;
 
     public float HP = 15.0f;
     
