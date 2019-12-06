@@ -1772,7 +1772,7 @@ GameObject:
   m_Component:
   - component: {fileID: 922083582}
   - component: {fileID: 922083583}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

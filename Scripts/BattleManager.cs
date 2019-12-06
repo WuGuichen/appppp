@@ -20,10 +20,8 @@ public class BattleManager : MonoBehaviour
     }
     private void OnTriggerEnter(Collider col)
     {
-        print(col.tag);
         if(col.tag == "Weapon")
         {
-            print(col.name);
             am.DoDamage();
         }
     }
