@@ -134,7 +134,7 @@ public class Actor_Controller : MonoBehaviour
 
         if (leftIsShield)
         {
-            if (CheckState("ground"))
+            if (CheckState("ground") || CheckState("blocked"))
             {
                 anim.SetBool("defense", pi.defense);
                 anim.SetLayerWeight(anim.GetLayerIndex("defense"), 1);
@@ -255,6 +255,7 @@ public class Actor_Controller : MonoBehaviour
     {
         isRoll = true;
         pi.inputEnable = false;
+        
         trackDirection = true;
         //float x = rigid.velocity.x / (Mathf.Sqrt(rigid.velocity.x * rigid.velocity.x + rigid.velocity.z * rigid.velocity.z * rigid.velocity.z));
         //float z = rigid.velocity.z / (Mathf.Sqrt(rigid.velocity.x * rigid.velocity.x + rigid.velocity.z * rigid.velocity.z * rigid.velocity.z));
@@ -266,7 +267,7 @@ public class Actor_Controller : MonoBehaviour
     public void OnRollExit()
     {
         isRoll = false;
-        
+        planarVec = Vector3.zero;
         pi.inputEnable = true;
         
     }
@@ -321,5 +322,16 @@ public class Actor_Controller : MonoBehaviour
     public void OnAttackExit()
     {
         model.SendMessage("WeaponDisable");
+    }
+
+    public void OnBlockEnter()
+    {
+        pi.inputEnable = false;
+    }
+
+    public void OnDieEnter()
+    {
+        pi.inputEnable = false;
+        planarVec = Vector3.zero;
     }
 }

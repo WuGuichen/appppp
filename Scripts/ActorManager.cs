@@ -46,10 +46,38 @@ public class ActorManager : MonoBehaviour
 
     public void TryDoDamage()
     {
-        if(sm.HP > 0)
-            sm.AddHP(-5);
-        //ac.Issuetrigger("die");
-        //sm.Test();
+        //if(sm.HP > 0)
+        //    sm.AddHP(-5);
+
+        if (sm.isDefense)
+        {
+            Blocked();
+        }
+        else
+        {
+            if (sm.HP <= 0)
+            {
+
+            }
+            else
+            {
+                sm.AddHP(-5);
+                if (sm.HP > 0)
+                {
+                    Hit();
+                }
+                else
+                {
+                    Die();
+                }
+            }
+        }
+
+    }
+
+    public void Blocked()
+    {
+        ac.Issuetrigger("blocked");
     }
 
     public void Hit()

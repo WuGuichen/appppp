@@ -21,6 +21,9 @@ public class StateManager : IActorManagerInterface
     public bool isBlocked;
     public bool isDefense;
 
+    [Header("2nd order state flag")]
+    public bool isAllowDefense;
+
 
     private void Start()
     {
@@ -38,7 +41,10 @@ public class StateManager : IActorManagerInterface
         isHit = am.ac.CheckState("hit");
         isDie = am.ac.CheckState("die");
         isBlocked = am.ac.CheckState("blocked");
-        isDefense = am.ac.CheckState("defense1h", "defense");     //查defense层
+        //isDefense = am.ac.CheckState("defense1h", "defense");     //查defense层
+
+        isAllowDefense = isGround || isBlocked;
+        isDefense = isAllowDefense && am.ac.CheckState("defense1h", "defense");
     }
 
     public void Test()
@@ -50,13 +56,6 @@ public class StateManager : IActorManagerInterface
     {
         HP += value;
         HP = Mathf.Clamp(HP, 0, HPMax);
-        if (HP > 0)
-        {
-            am.Hit();
-        }
-        else
-        {
-            am.Die();
-        }
+        
     }
 }
