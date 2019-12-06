@@ -344,6 +344,7 @@ public class Actor_Controller : MonoBehaviour
 
     public void OnCounterBackEnter()
     {
-
+        pi.inputEnable = false;
+        planarVec = Vector3.zero;
     }
 }
