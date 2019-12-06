@@ -48,8 +48,11 @@ public class ActorManager : MonoBehaviour
     {
         //if(sm.HP > 0)
         //    sm.AddHP(-5);
-
-        if (sm.isDefense)
+        if (sm.isImmortal)
+        {
+            // 无敌
+        }
+        else if (sm.isDefense)
         {
             Blocked();
         }
