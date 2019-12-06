@@ -143,7 +143,8 @@ public class Actor_Controller : MonoBehaviour
             else
             {
                 anim.SetBool("defense", false);
-                
+                anim.SetLayerWeight(anim.GetLayerIndex("defense"), 0);
+
             }
         }
         else
@@ -333,5 +334,16 @@ public class Actor_Controller : MonoBehaviour
     {
         pi.inputEnable = false;
         planarVec = Vector3.zero;
+    }
+
+    public void OnStunnedEnter()
+    {
+        pi.inputEnable = false;
+        planarVec = Vector3.zero;
+    }
+
+    public void OnCounterBackEnter()
+    {
+
     }
 }
