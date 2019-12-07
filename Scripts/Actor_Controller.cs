@@ -96,9 +96,7 @@ public class Actor_Controller : MonoBehaviour
                 planarVec1 = model.transform.forward * walkSpeed * rollVelocity;
             else
             {
-                //float x = rigid.velocity.x / (Mathf.Sqrt((rigid.velocity.x * rigid.velocity.x) + (rigid.velocity.z * rigid.velocity.z)));
-                //float z = rigid.velocity.z / (Mathf.Sqrt((rigid.velocity.x * rigid.velocity.x) + (rigid.velocity.z * rigid.velocity.z)));
-                //planarVec1 = new Vector3(x,0,z) * walkSpeed * rollVelocity;
+                
                 planarVec1 = rigid.velocity.normalized * walkSpeed * rollVelocity;
 
             }

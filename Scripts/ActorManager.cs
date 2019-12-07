@@ -44,11 +44,20 @@ public class ActorManager : MonoBehaviour
         
     }
 
-    public void TryDoDamage()
+    public void SetIsCounterBack(bool value)
+    {
+        sm.isCounterBack = value;
+    }
+
+    public void TryDoDamage(WeaponController targetWc)
     {
         //if(sm.HP > 0)
         //    sm.AddHP(-5);
-        if (sm.isImmortal)
+        if (sm.isCounterBack)
+        {
+            targetWc.wm.am.Stunned();
+        }
+        else if (sm.isImmortal)
         {
             // 无敌
         }
@@ -99,4 +108,11 @@ public class ActorManager : MonoBehaviour
         }
         ac.camcon.enabled = false;
     }
+
+    public void Stunned()
+    {
+        ac.Issuetrigger("stunned");
+    }
+
+    
 }

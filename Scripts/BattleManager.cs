@@ -20,9 +20,11 @@ public class BattleManager : IActorManagerInterface
     }
     private void OnTriggerEnter(Collider col)
     {
+        WeaponController targetWc = col.GetComponentInParent<WeaponController>();
+
         if(col.tag == "Weapon")
         {
-            am.TryDoDamage();
+            am.TryDoDamage(targetWc);
         }
     }
 
