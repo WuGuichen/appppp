@@ -10,6 +10,7 @@ public class ActorManager : MonoBehaviour
     public BattleManager bm;
     public WeaponManager wm;
     public StateManager sm;
+    
 
 
     void Awake()
@@ -17,7 +18,8 @@ public class ActorManager : MonoBehaviour
         ac = GetComponent<Actor_Controller>();
         GameObject model = ac.model;
         GameObject sensor = transform.Find("Sensor").gameObject;
-
+        
+        
         bm = Bind<BattleManager>(sensor);
         wm = Bind<WeaponManager>(model);
         sm = Bind<StateManager>(gameObject);
@@ -49,17 +51,19 @@ public class ActorManager : MonoBehaviour
         sm.isCounterBackEnable = value;
     }
 
-    public void TryDoDamage(WeaponController targetWc)
+    public void TryDoDamage(WeaponController targetWc, bool attackValid, bool counterValid)
     {
         //if(sm.HP > 0)
         //    sm.AddHP(-5);
         if (sm.isCounterBackSuccess)
         {
-            targetWc.wm.am.Stunned();
+            if (counterValid)
+                targetWc.wm.am.Stunned();
         }
         else if(sm.isCounterBackFailure)
         {
-            HitOrDie(false);
+            if (attackValid)
+                HitOrDie(false);
         }
         else if (sm.isImmortal)
         {
@@ -71,7 +75,8 @@ public class ActorManager : MonoBehaviour
         }
         else
         {
-            HitOrDie(true);
+            if (attackValid)
+                HitOrDie(true);
         }
 
     }

@@ -86,10 +86,17 @@ public class CameraController : MonoBehaviour
             {
                 lockDot.rectTransform.position = Camera.main.WorldToScreenPoint(lockTarget.obj.transform.position + new Vector3(0, lockTarget.halfHeight, 0));
             }
-                if (Vector3.Distance(model.transform.position, lockTarget.obj.transform.position) > 10.0f)
+            if (Vector3.Distance(model.transform.position, lockTarget.obj.transform.position) > 10.0f)
             {
                 LockProcessA(null, false, false, isAI);
             }
+
+            
+            if(lockTarget.am != null && lockTarget.am.sm.isDie)
+            {
+                LockProcessA(null, false, false, isAI);
+            }
+
               
         }
     }
@@ -145,11 +152,13 @@ public class CameraController : MonoBehaviour
     {
         public GameObject obj;
         public float halfHeight;
+        public ActorManager am;
 
         public LockTarget(GameObject _obj, float _halfHeight)
         {
             obj = _obj;
             halfHeight = _halfHeight;
+            am = _obj.GetComponent<ActorManager>();
         }
 
     }

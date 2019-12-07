@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Actor_Controller : MonoBehaviour
 {
     public GameObject model;
+    public GameObject playerDir;
     public CameraController camcon;
     public IUserInputer pi;
     
@@ -59,6 +60,7 @@ public class Actor_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if(pi.lockon)
         {
             camcon.LockUnlock();
@@ -97,9 +99,12 @@ public class Actor_Controller : MonoBehaviour
             else
             {
                 
-                planarVec1 = rigid.velocity.normalized * walkSpeed * rollVelocity;
+                planarVec1 = pi.Dvec.normalized * walkSpeed * rollVelocity;
 
             }
+            //print("M" + model.transform.forward);
+            //print("D"+planarVec1);
+            print("pi.Vec"+pi.Dvec.normalized);
             anim.SetTrigger("roll");
             //print(pi.roll);
             canAttack = false;
@@ -174,7 +179,7 @@ public class Actor_Controller : MonoBehaviour
         {
             if (pi.Dmag > 0.1f)
             {
-                model.transform.forward = Vector3.Slerp(model.transform.forward, pi.Dvec, 0.3f); ;
+                model.transform.forward = Vector3.Slerp(model.transform.forward, pi.Dvec, 0.5f);
             }
             if (!lockPlanar)
             {
@@ -194,18 +199,20 @@ public class Actor_Controller : MonoBehaviour
             }
 
         }
-    }
-    private void FixedUpdate()
-    {
+
         rigid.position += deltaPos;
         //rigid.position += movingVec * Time.fixedDeltaTime * walkSpeed;  //速度乘时间
-        if(!isRoll)
+        if (!isRoll)
             rigid.velocity = new Vector3(planarVec.x, rigid.velocity.y, planarVec.z) + thrustVec;
         else
-            rigid.velocity = new Vector3(planarVec1.x, rigid.velocity.y, planarVec1.z);
+            rigid.velocity = new Vector3(planarVec1.x, rigid.velocity.y, planarVec1.z) + thrustVec;
         //print(rigid.velocity);
         thrustVec = Vector3.zero;
         deltaPos = Vector3.zero;
+    }
+    private void FixedUpdate()
+    {
+        
 
     }
 
@@ -274,7 +281,7 @@ public class Actor_Controller : MonoBehaviour
     {
         isRoll = true;
         pi.inputEnable = false;
-        
+        thrustVec = new Vector3(0, jumpVelocity/2, 0);
         trackDirection = true;
         //float x = rigid.velocity.x / (Mathf.Sqrt(rigid.velocity.x * rigid.velocity.x + rigid.velocity.z * rigid.velocity.z * rigid.velocity.z));
         //float z = rigid.velocity.z / (Mathf.Sqrt(rigid.velocity.x * rigid.velocity.x + rigid.velocity.z * rigid.velocity.z * rigid.velocity.z));
@@ -286,7 +293,7 @@ public class Actor_Controller : MonoBehaviour
     public void OnRollExit()
     {
         isRoll = false;
-        planarVec = Vector3.zero;
+        //planarVec = Vector3.zero;
         pi.inputEnable = true;
         
     }
@@ -331,6 +338,7 @@ public class Actor_Controller : MonoBehaviour
     {
         pi.inputEnable = false;
         planarVec = Vector3.zero;
+        model.SendMessage("WeaponDisable");
     }
 
     public void Issuetrigger(string triggerName)
@@ -352,6 +360,7 @@ public class Actor_Controller : MonoBehaviour
     {
         pi.inputEnable = false;
         planarVec = Vector3.zero;
+        model.SendMessage("WeaponDisable");
     }
 
     public void OnStunnedEnter()
