@@ -374,4 +374,6 @@ public class Actor_Controller : MonoBehaviour
         pi.inputEnable = false;
         planarVec = Vector3.zero;
     }
+
+    
 }

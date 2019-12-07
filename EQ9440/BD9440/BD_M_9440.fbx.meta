@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 65d847001c4054e43a5b248af6841879
+guid: 914b0eaa09e02f044b1c6b4c4bcbf850
 ModelImporter:
   serializedVersion: 19300
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -4352182360597662222
+    second: Armature|Armature|Armature|Armature|Armature|Armature|mixamo.com|Layer0|
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -61,7 +64,7 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 1
+    normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
