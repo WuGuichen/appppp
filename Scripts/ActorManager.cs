@@ -46,16 +46,20 @@ public class ActorManager : MonoBehaviour
 
     public void SetIsCounterBack(bool value)
     {
-        sm.isCounterBack = value;
+        sm.isCounterBackEnable = value;
     }
 
     public void TryDoDamage(WeaponController targetWc)
     {
         //if(sm.HP > 0)
         //    sm.AddHP(-5);
-        if (sm.isCounterBack)
+        if (sm.isCounterBackSuccess)
         {
             targetWc.wm.am.Stunned();
+        }
+        else if(sm.isCounterBackFailure)
+        {
+            HitOrDie(false);
         }
         else if (sm.isImmortal)
         {
@@ -67,24 +71,31 @@ public class ActorManager : MonoBehaviour
         }
         else
         {
-            if (sm.HP <= 0)
-            {
+            HitOrDie(true);
+        }
 
+    }
+
+    public void HitOrDie(bool doHitAnimation)
+    {
+        if (sm.HP <= 0)
+        {
+
+        }
+        else
+        {
+            sm.AddHP(-5);
+            if (sm.HP > 0)
+            {
+                if (doHitAnimation)
+                    Hit();
+                // do some VFX. like splatter blood......
             }
             else
             {
-                sm.AddHP(-5);
-                if (sm.HP > 0)
-                {
-                    Hit();
-                }
-                else
-                {
-                    Die();
-                }
+                Die();
             }
         }
-
     }
 
     public void Blocked()

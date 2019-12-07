@@ -21,11 +21,13 @@ public class StateManager : IActorManagerInterface
     public bool isBlocked;
     public bool isDefense;
     public bool isCounterBack = false;       // rlate to state
-    //public bool isCounterBackEnable = false;     // relate to animation events
+    public bool isCounterBackEnable = false;     // relate to animation events
 
     [Header("2nd order state flag")]
     public bool isAllowDefense;
     public bool isImmortal;
+    public bool isCounterBackSuccess;
+    public bool isCounterBackFailure;
 
 
     private void Start()
@@ -45,11 +47,14 @@ public class StateManager : IActorManagerInterface
         isDie = am.ac.CheckState("die");
         isBlocked = am.ac.CheckState("blocked");
         //isDefense = am.ac.CheckState("defense1h", "defense");     //查defense层
-        //isCounterBack = am.ac.CheckState("counterBack");
+        isCounterBack = am.ac.CheckState("counterBack");
 
         isAllowDefense = isGround || isBlocked;
         isDefense = isAllowDefense && am.ac.CheckState("defense1h", "defense");
         isImmortal = isRoll || isJab;
+        isCounterBackSuccess = isCounterBackEnable;
+        isCounterBackFailure = isCounterBack && !isCounterBackEnable;
+
     }
 
     public void Test()
