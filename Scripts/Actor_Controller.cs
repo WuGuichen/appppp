@@ -375,5 +375,8 @@ public class Actor_Controller : MonoBehaviour
         planarVec = Vector3.zero;
     }
 
-    
+    public void OnCounterBackExit()
+    {
+        model.SendMessage("CounterBackDisable");
+    }
 }
