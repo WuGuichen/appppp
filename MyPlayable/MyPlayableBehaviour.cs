@@ -6,7 +6,7 @@ using UnityEngine.Timeline;
 [Serializable]
 public class MyPlayableBehaviour : PlayableBehaviour
 {
-    public Camera MyCamera;
+    public GameObject MyCamera;
     public float MyFloat;
 
     public override void OnPlayableCreate (Playable playable)
@@ -16,7 +16,16 @@ public class MyPlayableBehaviour : PlayableBehaviour
 
     public override void OnGraphStart(Playable playable)
     {
-        //Debug.Log("Graph Start");
+        PlayableDirector pd = (PlayableDirector)playable.GetGraph().GetResolver();
+        //Debug.Log(pd);
+        foreach (var track in pd.playableAsset.outputs)
+        {
+            //Debug.Log(track.streamName);
+            if(track.streamName == "My Playable Track")
+            {
+                Debug.Log(pd.GetGenericBinding(track.sourceObject));
+            }
+        }
     }
 
     public override void OnGraphStop(Playable playable)

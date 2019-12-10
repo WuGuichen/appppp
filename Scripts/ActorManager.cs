@@ -130,5 +130,9 @@ public class ActorManager : MonoBehaviour
         ac.Issuetrigger("stunned");
     }
 
+    public void TestEcho()
+    {
+        print("Echo ..........");
+    }
     
 }

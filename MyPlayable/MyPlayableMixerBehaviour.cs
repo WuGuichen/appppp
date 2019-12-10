@@ -25,6 +25,6 @@ public class MyPlayableMixerBehaviour : PlayableBehaviour
             // Use the above variables to process each frame of this playable.
             tempSum += input.MyFloat * inputWeight;
         }
-        Debug.Log(tempSum);
+        //Debug.Log(tempSum);
     }
 }
