@@ -35,7 +35,7 @@ public class BattleManager : IActorManagerInterface
         bool attackValid = (attackingAngle1 < 45);
         bool counterValid = (counterAngle1 < 30 && (counterAngle2 - 180) < 30);
 
-        print("atta" + attackingDir);
+        //print("atta" + attackingDir);
         if (col.tag == "Weapon")
         {
             am.TryDoDamage(targetWc, attackValid, counterValid);

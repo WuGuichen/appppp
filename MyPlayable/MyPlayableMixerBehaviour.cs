@@ -14,15 +14,17 @@ public class MyPlayableMixerBehaviour : PlayableBehaviour
             return;
 
         int inputCount = playable.GetInputCount ();
+        float tempSum = 0;
 
         for (int i = 0; i < inputCount; i++)
         {
             float inputWeight = playable.GetInputWeight(i);
             ScriptPlayable<MyPlayableBehaviour> inputPlayable = (ScriptPlayable<MyPlayableBehaviour>)playable.GetInput(i);
             MyPlayableBehaviour input = inputPlayable.GetBehaviour ();
-            
+
             // Use the above variables to process each frame of this playable.
-            
+            tempSum += input.MyFloat * inputWeight;
         }
+        Debug.Log(tempSum);
     }
 }

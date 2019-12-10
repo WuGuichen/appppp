@@ -104,7 +104,7 @@ public class Actor_Controller : MonoBehaviour
             }
             //print("M" + model.transform.forward);
             //print("D"+planarVec1);
-            print("pi.Vec"+pi.Dvec.normalized);
+            //print("pi.Vec"+pi.Dvec.normalized);
             anim.SetTrigger("roll");
             //print(pi.roll);
             canAttack = false;

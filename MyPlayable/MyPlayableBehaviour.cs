@@ -13,4 +13,20 @@ public class MyPlayableBehaviour : PlayableBehaviour
     {
         
     }
+
+    public override void OnGraphStart(Playable playable)
+    {
+        //Debug.Log("Graph Start");
+    }
+
+    public override void OnGraphStop(Playable playable)
+    {
+        base.OnGraphStop(playable);
+    }
+
+    public override void OnBehaviourPlay(Playable playable, FrameData info)
+    {
+        base.OnBehaviourPlay(playable, info);
+    }
+
 }
