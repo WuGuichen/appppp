@@ -22,8 +22,7 @@ public class Actor_Controller : MonoBehaviour
     public PhysicMaterial frictionOne;
     public PhysicMaterial frictionZero;
 
-    
-    private Animator anim;
+    public Animator anim;
     private Rigidbody rigid;
     private Vector3 planarVec;
     private Vector3 planarVec1; 
