@@ -341,10 +341,7 @@ public class Actor_Controller : MonoBehaviour
         model.SendMessage("WeaponDisable");
     }
 
-    public void Issuetrigger(string triggerName)
-    {
-        anim.SetTrigger(triggerName);
-    }
+    
 
     public void OnAttackExit()
     {
@@ -379,4 +376,16 @@ public class Actor_Controller : MonoBehaviour
     {
         model.SendMessage("CounterBackDisable");
     }
+
+    public void Issuetrigger(string triggerName)
+    {
+        anim.SetTrigger(triggerName);
+    }
+
+    public void SetBool(string boolName, bool value)
+    {
+        anim.SetBool(boolName, value);
+        
+    }
+
 }

@@ -9,6 +9,8 @@ public class MyPlayableBehaviour : PlayableBehaviour
     public GameObject MyCamera;
     public float MyFloat;
 
+    PlayableDirector pd;
+
     public override void OnPlayableCreate (Playable playable)
     {
         
@@ -16,21 +18,27 @@ public class MyPlayableBehaviour : PlayableBehaviour
 
     public override void OnGraphStart(Playable playable)
     {
-        PlayableDirector pd = (PlayableDirector)playable.GetGraph().GetResolver();
-        //Debug.Log(pd);
+        pd = (PlayableDirector)playable.GetGraph().GetResolver();
         foreach (var track in pd.playableAsset.outputs)
         {
-            //Debug.Log(track.streamName);
-            if(track.streamName == "My Playable Track")
+            if(track.streamName == "Attacker Script" || track.streamName == "Victim Script")
             {
-                Debug.Log(pd.GetGenericBinding(track.sourceObject));
+                ActorManager am = (ActorManager)pd.GetGenericBinding(track.sourceObject);
+                am.LockUnlockActorController(true);
             }
         }
     }
 
     public override void OnGraphStop(Playable playable)
     {
-        base.OnGraphStop(playable);
+        foreach (var track in pd.playableAsset.outputs)
+        {
+            if (track.streamName == "Attacker Script" || track.streamName == "Victim Script")
+            {
+                ActorManager am = (ActorManager)pd.GetGenericBinding(track.sourceObject);
+                //am.LockUnlockActorController(false);
+            }
+        }
     }
 
     public override void OnBehaviourPlay(Playable playable, FrameData info)

@@ -134,5 +134,12 @@ public class ActorManager : MonoBehaviour
     {
         print("Echo ..........");
     }
+
+    public void LockUnlockActorController(bool value)
+    {
+        ac.SetBool("lock", value);
+    }
+
+
     
 }
