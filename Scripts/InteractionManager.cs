@@ -22,8 +22,8 @@ public class InteractionManager : IActorManagerInterface
         EventCasterManager[] ecastms = col.GetComponents<EventCasterManager>();
         foreach (var ecastm in ecastms)
         {
-            print("EventName  "+ecastm.eventName);
-            print("Active  " + ecastm.active);
+            //print("EventName  "+ecastm.eventName);
+            //print("Active  " + ecastm.active);
         }
     }
 }

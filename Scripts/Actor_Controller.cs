@@ -33,6 +33,9 @@ public class Actor_Controller : MonoBehaviour
     private Vector3 deltaPos;
 
     public bool leftIsShield = true;
+
+    public delegate void OnActionDelegate();
+    public event OnActionDelegate OnAction;
     
     private bool lockPlanar = false;
     public bool isRoll = false;
@@ -151,6 +154,11 @@ public class Actor_Controller : MonoBehaviour
                     anim.SetTrigger("counterBack");
                 }
             }
+        }
+
+        if(pi.action)
+        {
+            OnAction.Invoke();
         }
 
 

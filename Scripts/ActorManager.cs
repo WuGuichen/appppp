@@ -27,6 +27,19 @@ public class ActorManager : MonoBehaviour
         dm = Bind<DirectorManager>(gameObject);
         im = Bind<InteractionManager>(sensor);
         //sm.Test();
+
+        ac.OnAction += Action1;
+        ac.OnAction += Action2;
+    }
+
+    public void Action1()
+    {
+        print("action1 !!!!!");
+    }
+
+    public void Action2()
+    {
+        print("22222222222");
     }
 
     private T Bind<T>(GameObject go) where T : IActorManagerInterface
