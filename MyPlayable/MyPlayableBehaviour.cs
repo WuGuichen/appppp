@@ -46,4 +46,13 @@ public class MyPlayableBehaviour : PlayableBehaviour
         base.OnBehaviourPlay(playable, info);
     }
 
+    public override void OnBehaviourPause(Playable playable, FrameData info)
+    {
+        base.OnBehaviourPause(playable, info);
+    }
+
+    public override void PrepareFrame(Playable playable, FrameData info)
+    {
+        base.PrepareFrame(playable, info);
+    }
 }

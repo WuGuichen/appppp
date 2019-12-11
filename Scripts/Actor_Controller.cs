@@ -395,4 +395,11 @@ public class Actor_Controller : MonoBehaviour
         
     }
 
+    public void OnLockEnter()
+    {
+        pi.inputEnable = false;
+        planarVec = Vector3.zero;
+        model.SendMessage("WeaponDisable");
+    }
+
 }
