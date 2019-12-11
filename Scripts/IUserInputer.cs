@@ -15,6 +15,7 @@ public abstract class IUserInputer : MonoBehaviour
     // 1. pressing signal
     public bool run;
     // 2.trigger once signal
+    public bool action;
     public bool jump;
     protected bool lastJump;
     //public bool attack;

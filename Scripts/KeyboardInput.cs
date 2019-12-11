@@ -108,6 +108,8 @@ public class KeyboardInput : IUserInputer
         run = (KeyA.isPressing && !KeyA.IsDelaying) || (run&&KeyA.IsExtending);
         jump = run && KeyA.onPressed;
         roll = KeyA.OnReleased && KeyA.IsDelaying;
+        action = KeyG.onPressed;
+
         defense = KeyH_RightMouse.isPressing;
         rb = KeyF_LeftMouse.onPressed;
         rt = KeyG.onPressed;
