@@ -7,6 +7,8 @@ public class EventCasterManager : IActorManagerInterface
     public string eventName;
     public bool active;
 
+    //[Header("===  ===")]
+
     //// Start is called before the first frame update
     void Start()
     {

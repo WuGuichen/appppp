@@ -21,27 +21,27 @@ public class DirectorManager : IActorManagerInterface
     {
         pd = GetComponent<PlayableDirector>();
         pd.playOnAwake = false;
-        pd.playableAsset = Instantiate(frontStab);
+        //pd.playableAsset = Instantiate(frontStab);
 
-        foreach (var track in pd.playableAsset.outputs)
-        {
-            if (track.streamName == "Attacker Script")
-            {
-                pd.SetGenericBinding(track.sourceObject, attacker);
-            }
-            else if (track.streamName == "Victim Script")
-            {
-                pd.SetGenericBinding(track.sourceObject, victim);
-            }
-            else if (track.streamName == "Attacker Animation")
-            {
-                pd.SetGenericBinding(track.sourceObject, attacker.ac.anim);
-            }
-            else if (track.streamName == "Victim Animation")
-            {
-                pd.SetGenericBinding(track.sourceObject, victim.ac.anim);
-            }
-        }
+        //foreach (var track in pd.playableAsset.outputs)
+        //{
+        //    if (track.streamName == "Attacker Script")
+        //    {
+        //        pd.SetGenericBinding(track.sourceObject, attacker);
+        //    }
+        //    else if (track.streamName == "Victim Script")
+        //    {
+        //        pd.SetGenericBinding(track.sourceObject, victim);
+        //    }
+        //    else if (track.streamName == "Attacker Animation")
+        //    {
+        //        pd.SetGenericBinding(track.sourceObject, attacker.ac.anim);
+        //    }
+        //    else if (track.streamName == "Victim Animation")
+        //    {
+        //        pd.SetGenericBinding(track.sourceObject, victim.ac.anim);
+        //    }
+        //}
     }
 
     // Update is called once per frame
@@ -49,5 +49,34 @@ public class DirectorManager : IActorManagerInterface
     {
         if (Input.GetKeyDown(KeyCode.N) && gameObject.layer == LayerMask.NameToLayer("Player"))
             pd.Play();
+    }
+
+    public void PlayFrontStab(string timelineName, ActorManager attacker, ActorManager victim)
+    {
+        if(timelineName == "frontStab")
+        {
+            pd.playableAsset = Instantiate(frontStab);
+
+            foreach (var track in pd.playableAsset.outputs)
+            {
+                if (track.streamName == "Attacker Script")
+                {
+                    pd.SetGenericBinding(track.sourceObject, attacker);
+                }
+                else if (track.streamName == "Victim Script")
+                {
+                    pd.SetGenericBinding(track.sourceObject, victim);
+                }
+                else if (track.streamName == "Attacker Animation")
+                {
+                    pd.SetGenericBinding(track.sourceObject, attacker.ac.anim);
+                }
+                else if (track.streamName == "Victim Animation")
+                {
+                    pd.SetGenericBinding(track.sourceObject, victim.ac.anim);
+                }
+            }
+            pd.Play();
+        }
     }
 }
