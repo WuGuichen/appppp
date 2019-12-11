@@ -87,6 +87,7 @@ public class DirectorManager : IActorManagerInterface
                         MyPlayableBehaviour mybehav = myclip.template;
                         //Debug.Log(mybehav.MyFloat);
                         mybehav.MyFloat = 56666;
+                        pd.SetReferenceValue(myclip.MyCamera.exposedName, GameObject.Find("B"));
                     }
                 }
                 else if (track.name == "Attacker Animation")
