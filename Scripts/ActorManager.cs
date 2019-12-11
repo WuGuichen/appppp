@@ -11,6 +11,7 @@ public class ActorManager : MonoBehaviour
     public WeaponManager wm;
     public StateManager sm;
     public DirectorManager dm;
+    public InteractionManager im;
 
 
     void Awake()
@@ -24,6 +25,7 @@ public class ActorManager : MonoBehaviour
         wm = Bind<WeaponManager>(model);
         sm = Bind<StateManager>(gameObject);
         dm = Bind<DirectorManager>(gameObject);
+        im = Bind<InteractionManager>(sensor);
         //sm.Test();
     }
 

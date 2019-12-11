@@ -36,7 +36,7 @@ public class MyPlayableBehaviour : PlayableBehaviour
             if (track.streamName == "Attacker Script" || track.streamName == "Victim Script")
             {
                 ActorManager am = (ActorManager)pd.GetGenericBinding(track.sourceObject);
-                //am.LockUnlockActorController(false);
+                am.LockUnlockActorController(false);
             }
         }
     }
