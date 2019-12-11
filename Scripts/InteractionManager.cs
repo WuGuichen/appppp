@@ -6,6 +6,8 @@ public class InteractionManager : IActorManagerInterface
 {
     private CapsuleCollider interCol;
 
+    public List<EventCasterManager> overlapEcastms = new List<EventCasterManager>();
+
     void Start()
     {
         interCol = GetComponent<CapsuleCollider>();
@@ -17,13 +19,23 @@ public class InteractionManager : IActorManagerInterface
         
     }
 
-    private void OnTriggerStay(Collider col)
+    private void OnTriggerEnter(Collider col)
     {
         EventCasterManager[] ecastms = col.GetComponents<EventCasterManager>();
         foreach (var ecastm in ecastms)
         {
-            //print("EventName  "+ecastm.eventName);
-            //print("Active  " + ecastm.active);
+            if (!overlapEcastms.Contains(ecastm))
+                overlapEcastms.Add(ecastm);
+        }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        EventCasterManager[] ecastms = col.GetComponents<EventCasterManager>();
+        foreach (var ecastm in ecastms)
+        {
+            if (overlapEcastms.Contains(ecastm))
+                overlapEcastms.Remove(ecastm);
         }
     }
 }

@@ -28,19 +28,18 @@ public class ActorManager : MonoBehaviour
         im = Bind<InteractionManager>(sensor);
         //sm.Test();
 
-        ac.OnAction += Action1;
-        ac.OnAction += Action2;
+        ac.OnAction += DoAction;
     }
 
-    public void Action1()
+    public void DoAction()
     {
-        print("action1 !!!!!");
+        //print("action1 !!!!!");
+        if(im.overlapEcastms.Count != 0)
+        {
+            print(im.overlapEcastms[0].eventName);
+        }
     }
 
-    public void Action2()
-    {
-        print("22222222222");
-    }
 
     private T Bind<T>(GameObject go) where T : IActorManagerInterface
     {
