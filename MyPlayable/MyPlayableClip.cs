@@ -7,7 +7,7 @@ using UnityEngine.Timeline;
 public class MyPlayableClip : PlayableAsset, ITimelineClipAsset
 {
     public MyPlayableBehaviour template = new MyPlayableBehaviour ();
-    public ExposedReference<GameObject> MyCamera;
+    public ExposedReference<ActorManager> am;
 
     public ClipCaps clipCaps
     {
@@ -18,7 +18,7 @@ public class MyPlayableClip : PlayableAsset, ITimelineClipAsset
     {
         var playable = ScriptPlayable<MyPlayableBehaviour>.Create (graph, template);
         MyPlayableBehaviour clone = playable.GetBehaviour ();
-        clone.MyCamera = MyCamera.Resolve (graph.GetResolver ());
+        clone.am = am.Resolve (graph.GetResolver ());
         return playable;
     }
 }

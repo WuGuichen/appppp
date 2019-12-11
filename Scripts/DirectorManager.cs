@@ -74,7 +74,7 @@ public class DirectorManager : IActorManagerInterface
                         //Debug.Log(mybehav.MyFloat);
                         mybehav.MyFloat = 7777;
                         //mybehav.MyCamera = GameObject.Find("A");  错的，..不能加场景物件
-                        pd.SetReferenceValue(myclip.MyCamera.exposedName, GameObject.Find("A"));
+                        pd.SetReferenceValue(myclip.am.exposedName, attacker);
                     }
                 }
                 else if (track.name == "Victim Script")
@@ -87,7 +87,7 @@ public class DirectorManager : IActorManagerInterface
                         MyPlayableBehaviour mybehav = myclip.template;
                         //Debug.Log(mybehav.MyFloat);
                         mybehav.MyFloat = 56666;
-                        pd.SetReferenceValue(myclip.MyCamera.exposedName, GameObject.Find("B"));
+                        pd.SetReferenceValue(myclip.am.exposedName, victim);
                     }
                 }
                 else if (track.name == "Attacker Animation")

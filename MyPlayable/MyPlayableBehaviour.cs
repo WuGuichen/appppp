@@ -6,7 +6,7 @@ using UnityEngine.Timeline;
 [Serializable]
 public class MyPlayableBehaviour : PlayableBehaviour
 {
-    public GameObject MyCamera;
+    public ActorManager am;
     public float MyFloat;
 
     PlayableDirector pd;
@@ -28,12 +28,12 @@ public class MyPlayableBehaviour : PlayableBehaviour
 
     public override void OnBehaviourPlay(Playable playable, FrameData info)
     {
-        
+        am.LockUnlockActorController(true);
     }
 
     public override void OnBehaviourPause(Playable playable, FrameData info)
     {
-        
+        am.LockUnlockActorController(false);
     }
 
     public override void PrepareFrame(Playable playable, FrameData info)
