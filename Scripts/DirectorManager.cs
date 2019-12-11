@@ -71,11 +71,22 @@ public class DirectorManager : IActorManagerInterface
                         //Debug.Log(clip.displayName);
                         MyPlayableClip myclip = (MyPlayableClip)clip.asset;
                         MyPlayableBehaviour mybehav = myclip.template;
-                        Debug.Log(mybehav.MyFloat);
+                        //Debug.Log(mybehav.MyFloat);
+                        mybehav.MyFloat = 7777;
                     }
                 }
                 else if (track.name == "Victim Script")
+                {
                     pd.SetGenericBinding(track, victim);
+                    foreach (var clip in track.GetClips())
+                    {
+                        //Debug.Log(clip.displayName);
+                        MyPlayableClip myclip = (MyPlayableClip)clip.asset;
+                        MyPlayableBehaviour mybehav = myclip.template;
+                        //Debug.Log(mybehav.MyFloat);
+                        mybehav.MyFloat = 56666;
+                    }
+                }
                 else if (track.name == "Attacker Animation")
                     pd.SetGenericBinding(track, attacker.ac.anim);
                 else if (track.name == "Victim Animation")
