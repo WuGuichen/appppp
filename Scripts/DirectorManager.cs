@@ -64,7 +64,16 @@ public class DirectorManager : IActorManagerInterface
             foreach (var track in timeline.GetOutputTracks())
             {
                 if (track.name == "Attacker Script")
+                {
                     pd.SetGenericBinding(track, attacker);
+                    foreach (var clip in track.GetClips())
+                    {
+                        //Debug.Log(clip.displayName);
+                        MyPlayableClip myclip = (MyPlayableClip)clip.asset;
+                        MyPlayableBehaviour mybehav = myclip.template;
+                        Debug.Log(mybehav.MyFloat);
+                    }
+                }
                 else if (track.name == "Victim Script")
                     pd.SetGenericBinding(track, victim);
                 else if (track.name == "Attacker Animation")
