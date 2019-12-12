@@ -53,6 +53,8 @@ public class DirectorManager : IActorManagerInterface
 
     public void PlayFrontStab(string timelineName, ActorManager attacker, ActorManager victim)
     {
+        if (pd.playableAsset != null)
+            return;                             //消除连刺
         if(timelineName == "frontStab")
         {
             //pd.Evaluate();
@@ -119,7 +121,8 @@ public class DirectorManager : IActorManagerInterface
             //        pd.SetGenericBinding(trackBinding.sourceObject, victim.ac.anim);
             //    }
             //}
-            
+
+            pd.Evaluate();
             pd.Play();
         }
     }

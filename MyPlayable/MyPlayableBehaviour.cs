@@ -18,12 +18,14 @@ public class MyPlayableBehaviour : PlayableBehaviour
 
     public override void OnGraphStart(Playable playable)
     {
+        pd = (PlayableDirector)playable.GetGraph().GetResolver();
         
     }
 
     public override void OnGraphStop(Playable playable)
     {
-        
+        if (pd != null)
+            pd.playableAsset = null;
     }
 
     public override void OnBehaviourPlay(Playable playable, FrameData info)
@@ -39,6 +41,6 @@ public class MyPlayableBehaviour : PlayableBehaviour
     public override void PrepareFrame(Playable playable, FrameData info)
     {
         am.LockUnlockActorController(true);
-        Debug.Log("ห๘มห");
+        //Debug.Log("ห๘มห");
     }
 }
