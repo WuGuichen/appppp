@@ -156,11 +156,7 @@ public class Actor_Controller : MonoBehaviour
             }
         }
 
-        if(pi.action)
-        {
-            OnAction.Invoke();
-        }
-
+        
 
         if (leftIsShield)
         {
@@ -184,9 +180,12 @@ public class Actor_Controller : MonoBehaviour
 
         if (!camcon.lockState)
         {
-            if (pi.Dmag > 0.1f)
+            if (pi.inputEnable == true)
             {
-                model.transform.forward = Vector3.Slerp(model.transform.forward, pi.Dvec, 0.5f);
+                if (pi.Dmag > 0.1f)
+                {
+                    model.transform.forward = Vector3.Slerp(model.transform.forward, pi.Dvec, 0.5f);
+                }
             }
             if (!lockPlanar)
             {
@@ -206,6 +205,12 @@ public class Actor_Controller : MonoBehaviour
             }
 
         }
+
+        if (pi.action)
+        {
+            OnAction.Invoke();
+        }
+
 
         rigid.position += deltaPos;
         //rigid.position += movingVec * Time.fixedDeltaTime * walkSpeed;  //速度乘时间
