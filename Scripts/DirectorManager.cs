@@ -55,6 +55,7 @@ public class DirectorManager : IActorManagerInterface
     {
         if(timelineName == "frontStab")
         {
+            //pd.Evaluate();
             pd.playableAsset = Instantiate(frontStab);
 
             //取到第一层级Timeline
@@ -75,6 +76,7 @@ public class DirectorManager : IActorManagerInterface
                         mybehav.MyFloat = 7777;
                         //mybehav.MyCamera = GameObject.Find("A");  错的，..不能加场景物件
                         pd.SetReferenceValue(myclip.am.exposedName, attacker);
+                        //Debug.Log(myclip.am.exposedName);
                     }
                 }
                 else if (track.name == "Victim Script")
@@ -88,6 +90,7 @@ public class DirectorManager : IActorManagerInterface
                         //Debug.Log(mybehav.MyFloat);
                         mybehav.MyFloat = 56666;
                         pd.SetReferenceValue(myclip.am.exposedName, victim);
+                        //Debug.Log(myclip.am.exposedName);
                     }
                 }
                 else if (track.name == "Attacker Animation")
@@ -116,6 +119,7 @@ public class DirectorManager : IActorManagerInterface
             //        pd.SetGenericBinding(trackBinding.sourceObject, victim.ac.anim);
             //    }
             //}
+            
             pd.Play();
         }
     }

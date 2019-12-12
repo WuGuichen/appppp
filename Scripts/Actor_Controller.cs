@@ -392,6 +392,7 @@ public class Actor_Controller : MonoBehaviour
     public void SetBool(string boolName, bool value)
     {
         anim.SetBool(boolName, value);
+        print(anim.name);
         
     }
 
