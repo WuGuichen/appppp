@@ -24,25 +24,41 @@ public class BattleManager : IActorManagerInterface
         if (targetWc == null)
             return;
 
-        GameObject attacker = targetWc.wm.am.gameObject;
-        GameObject receiver = am.gameObject;                      //受击者
+        GameObject attacker = targetWc.wm.gameObject;
+        GameObject receiver = am.ac.model;                      //受击者
 
-        Vector3 attackingDir = receiver.transform.position - attacker.transform.position;
-        Vector3 counterDir = attacker.transform.position - receiver.transform.position;
-       
-        float attackingAngle1 = Vector3.Angle(attacker.transform.forward, attackingDir);
-        float counterAngle1 = Vector3.Angle(receiver.transform.forward, counterDir);
-        float counterAngle2 = Vector3.Angle(attacker.transform.forward, receiver.transform.forward);  // should be close to 180 degree
-
-        bool attackValid = (attackingAngle1 < 45);
-        bool counterValid = (counterAngle1 < 30 && (counterAngle2 - 180) < 30);
+        
 
         //print("atta" + attackingDir);
         if (col.tag == "Weapon")
         {
-            am.TryDoDamage(targetWc, attackValid, counterValid);
+            am.TryDoDamage(targetWc, CheckAngleTarget(receiver,attacker,45), CheckAnglePlayer(receiver,attacker,30));
         }
+
+        
     }
 
+    //victim 用
+    public static bool CheckAnglePlayer(GameObject player, GameObject target, float playerAngleLimit)
+    {
+        Vector3 counterDir = target.transform.position - player.transform.position;
+
+        float counterAngle1 = Vector3.Angle(player.transform.forward, counterDir);
+        float counterAngle2 = Vector3.Angle(target.transform.forward, player.transform.forward);  // should be close to 180 degree
+
+        bool counterValid = (counterAngle1 < playerAngleLimit && Mathf.Abs(counterAngle2 - 180) < playerAngleLimit);
+        return counterValid;
+    }
+
+    //attacker 用
+    public static bool CheckAngleTarget(GameObject player, GameObject target, float targetAngleLimit)
+    {
+        Vector3 attackingDir = player.transform.position - target.transform.position;
+
+        float attackingAngle1 = Vector3.Angle(target.transform.forward, attackingDir);
+
+        bool attackValid = (attackingAngle1 < targetAngleLimit);
+        return attackValid;
+    }
     
 }
