@@ -38,10 +38,10 @@ public class ActorManager : MonoBehaviour
         {
             //print(im.overlapEcastms[0].eventName);
             //I should play corresponding(eventName) timeline here
-            if(im.overlapEcastms[0].eventName == "frontStab")
-            {
+            if (im.overlapEcastms[0].eventName == "frontStab")
                 dm.PlayFrontStab("frontStab", this, im.overlapEcastms[0].am);
-            }
+            else if (im.overlapEcastms[0].eventName == "openBox")
+                dm.PlayFrontStab("openBox", this, im.overlapEcastms[0].am);
         }
     }
 

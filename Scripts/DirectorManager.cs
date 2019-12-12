@@ -55,6 +55,7 @@ public class DirectorManager : IActorManagerInterface
     {
         if (pd.playableAsset != null)
             return;                             //消除连刺
+        
         if(timelineName == "frontStab")
         {
             //pd.Evaluate();
@@ -126,6 +127,11 @@ public class DirectorManager : IActorManagerInterface
 
             pd.Evaluate();
             pd.Play();
+        }
+
+        else if (timelineName == "openBox")
+        {
+            Debug.Log("try to openBox");
         }
     }
 }
