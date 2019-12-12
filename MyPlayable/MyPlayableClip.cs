@@ -19,7 +19,7 @@ public class MyPlayableClip : PlayableAsset, ITimelineClipAsset
         //Debug.Log("Create playable");
         var playable = ScriptPlayable<MyPlayableBehaviour>.Create (graph, template);
         MyPlayableBehaviour clone = playable.GetBehaviour ();
-        am.exposedName = GetInstanceID().ToString();
+        //am.exposedName = GetInstanceID().ToString();
         clone.am = am.Resolve (graph.GetResolver ());
         return playable;
     }
