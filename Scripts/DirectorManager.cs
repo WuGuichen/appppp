@@ -11,6 +11,7 @@ public class DirectorManager : IActorManagerInterface
 
     [Header("====== Timeline assets =====")]
     public TimelineAsset frontStab;
+    public TimelineAsset openBox;
 
     [Header("===== Assets Settings =====")]
     public ActorManager attacker;
@@ -53,8 +54,10 @@ public class DirectorManager : IActorManagerInterface
 
     public void PlayFrontStab(string timelineName, ActorManager attacker, ActorManager victim)
     {
-        if (pd.playableAsset != null)
-            return;                             //消除连刺
+        //if (pd.playableAsset != null)
+        //   return;                             //消除连刺
+        if (pd.state == PlayState.Playing)
+            return;
         
         if(timelineName == "frontStab")
         {
@@ -72,15 +75,15 @@ public class DirectorManager : IActorManagerInterface
                     pd.SetGenericBinding(track, attacker);
                     foreach (var clip in track.GetClips())
                     {
-                        //Debug.Log(clip.displayName);
+                        
                         MyPlayableClip myclip = (MyPlayableClip)clip.asset;
                         MyPlayableBehaviour mybehav = myclip.template;
-                        //Debug.Log(mybehav.MyFloat);
+                        
                         mybehav.MyFloat = 7777;
                         myclip.am.exposedName = System.Guid.NewGuid().ToString();
-                        //mybehav.MyCamera = GameObject.Find("A");  错的，..不能加场景物件
+                        
                         pd.SetReferenceValue(myclip.am.exposedName, attacker);
-                        //Debug.Log(myclip.am.exposedName);
+                        
                     }
                 }
                 else if (track.name == "Victim Script")
@@ -88,14 +91,11 @@ public class DirectorManager : IActorManagerInterface
                     pd.SetGenericBinding(track, victim);
                     foreach (var clip in track.GetClips())
                     {
-                        //Debug.Log(clip.displayName);
                         MyPlayableClip myclip = (MyPlayableClip)clip.asset;
                         MyPlayableBehaviour mybehav = myclip.template;
-                        //Debug.Log(mybehav.MyFloat);
                         mybehav.MyFloat = 56666;
                         myclip.am.exposedName = System.Guid.NewGuid().ToString();
                         pd.SetReferenceValue(myclip.am.exposedName, victim);
-                        //Debug.Log(myclip.am.exposedName);
                     }
                 }
                 else if (track.name == "Attacker Animation")
@@ -105,33 +105,59 @@ public class DirectorManager : IActorManagerInterface
 
             }
 
-            //foreach (var trackBinding in pd.playableAsset.outputs)
-            //{
-            //    if (trackBinding.streamName == "Attacker Script")
-            //    {
-            //        pd.SetGenericBinding(trackBinding.sourceObject, attacker);
-            //    }
-            //    else if (trackBinding.streamName == "Victim Script")
-            //    {
-            //        pd.SetGenericBinding(trackBinding.sourceObject, victim);
-            //    }
-            //    else if (trackBinding.streamName == "Attacker Animation")
-            //    {
-            //        pd.SetGenericBinding(trackBinding.sourceObject, attacker.ac.anim);
-            //    }
-            //    else if (trackBinding.streamName == "Victim Animation")
-            //    {
-            //        pd.SetGenericBinding(trackBinding.sourceObject, victim.ac.anim);
-            //    }
-            //}
+            
 
             pd.Evaluate();
             pd.Play();
         }
 
+
         else if (timelineName == "openBox")
         {
-            Debug.Log("try to openBox");
+            pd.playableAsset = Instantiate(openBox);
+
+            //取到第一层级Timeline
+            TimelineAsset timeline = (TimelineAsset)pd.playableAsset;
+
+            //取track
+            foreach (var track in timeline.GetOutputTracks())
+            {
+                if (track.name == "Player Script")
+                {
+                    pd.SetGenericBinding(track, attacker);
+                    foreach (var clip in track.GetClips())
+                    {
+
+                        MyPlayableClip myclip = (MyPlayableClip)clip.asset;
+                        MyPlayableBehaviour mybehav = myclip.template;
+                        myclip.am.exposedName = System.Guid.NewGuid().ToString();
+
+                        pd.SetReferenceValue(myclip.am.exposedName, attacker);
+
+                    }
+                }
+                else if (track.name == "Box Script")
+                {
+                    pd.SetGenericBinding(track, victim);
+                    foreach (var clip in track.GetClips())
+                    {
+                        MyPlayableClip myclip = (MyPlayableClip)clip.asset;
+                        MyPlayableBehaviour mybehav = myclip.template;
+                        myclip.am.exposedName = System.Guid.NewGuid().ToString();
+                        pd.SetReferenceValue(myclip.am.exposedName, victim);
+                    }
+                }
+                else if (track.name == "Player Animation")
+                    pd.SetGenericBinding(track, attacker.ac.anim);
+                else if (track.name == "Box Animation")
+                    pd.SetGenericBinding(track, victim.ac.anim);
+
+            }
+
+
+
+            pd.Evaluate();
+            pd.Play();
         }
     }
 }
