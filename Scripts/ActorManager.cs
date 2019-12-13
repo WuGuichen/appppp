@@ -26,8 +26,9 @@ public class ActorManager : MonoBehaviour
         }
         catch (System.Exception ex)
         {
-
-            
+            //
+            // If there is no "sensor" object
+            //
         }
         
         
@@ -79,6 +80,8 @@ public class ActorManager : MonoBehaviour
     private T Bind<T>(GameObject go) where T : IActorManagerInterface
     {
         T tempInstance;
+        if (go == null)
+            return null;
         tempInstance = go.GetComponent<T>();
         if(tempInstance == null)
         {
