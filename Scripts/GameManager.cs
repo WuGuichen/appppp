@@ -8,19 +8,37 @@ public class GameManager : MonoBehaviour
     /// Make it a singleton....later
     /// </summary>
 
+    private static GameManager instance;
+
 
     
-    void Start()
+    void Awake()
     {
-        GameObject prefab = (GameObject) Resources.Load("Falchion");
-        Instantiate(prefab, Vector3.zero, Quaternion.identity);
-
-        //Resources.UnloadUnusedAssets(); // not necessary
+        CheckGameObject();
+        CheckSingle();
     }
 
     
     void Update()
     {
         
+    }
+    private void CheckSingle()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            return;
+        }
+        Destroy(this);
+    }
+
+    private void CheckGameObject()
+    {
+        if (tag == "GM")
+            return;
+        else
+            Destroy(this);
     }
 }
