@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     private DataBase weaponDB;
+    private WeaponFactory weaponFact;
 
 
     
@@ -13,25 +14,33 @@ public class GameManager : MonoBehaviour
     {
         CheckGameObject();
         CheckSingle();
-        InitWeaponDB();
+        
 
         
     }
 
     private void Start()
     {
+        InitWeaponDB();
+        InitWeaponFactory();
 
+        weaponFact.CreateWeapon("Falchion", transform);
     }
 
     void Update()
     {
         
     }
-
     private void InitWeaponDB()
     {
         weaponDB = new DataBase();
     }
+
+    private void InitWeaponFactory()
+    {
+        weaponFact = new WeaponFactory(weaponDB);
+    }
+
 
     private void CheckSingle()
     {
