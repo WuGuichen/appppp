@@ -16,9 +16,18 @@ public class GameManager : MonoBehaviour
     {
         CheckGameObject();
         CheckSingle();
+
+        
     }
 
-    
+    private void Start()
+    {
+        TextAsset myText = Resources.Load("abc") as TextAsset;
+        //print(myText.text);
+        JSONObject abc = new JSONObject(myText.text);
+        print(abc["Sword"]["ATK"].f);
+    }
+
     void Update()
     {
         
