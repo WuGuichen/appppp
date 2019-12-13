@@ -24,18 +24,30 @@ public class WeaponFactory
 
 	}
 
-	public GameObject CreateWeapon(string weaponName, Transform parent)
+	public bool CreateWeapon(string weaponName, string side, WeaponManager wm)
 	{
+		WeaponController wc;
+		if (side == "L")
+		{
+			wc = wm.wcL;
+		}
+		else if (side == "R")
+		{
+			wc = wm.wcR;
+		}
+		else
+			return false;
+
 		GameObject prefab = Resources.Load(weaponName) as GameObject;
 		GameObject obj = GameObject.Instantiate(prefab);
-		obj.transform.parent = parent;
+		obj.transform.parent = wc.transform;
 		obj.transform.localPosition = Vector3.zero;
 		obj.transform.localRotation = Quaternion.identity;
 
 		WeaponData wdata = obj.AddComponent<WeaponData>();
 		wdata.ATK = weaponDB.weaponDataBase[weaponName]["ATK"].f;
 
-		return obj;
+		return true;
 	}
 
 }

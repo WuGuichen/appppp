@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private DataBase weaponDB;
     private WeaponFactory weaponFact;
 
-
+    public WeaponManager testWm;
     
     void Awake()
     {
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
         InitWeaponDB();
         InitWeaponFactory();
 
-        weaponFact.CreateWeapon("Mace", transform);
+        weaponFact.CreateWeapon("Mace", "R", testWm);
     }
 
     void Update()
