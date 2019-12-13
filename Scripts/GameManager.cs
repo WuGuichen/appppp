@@ -31,8 +31,17 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
+            testWm.UnloadWeapon("R");
             testWm.UpdateWeaponCollider("R", weaponFact.CreateWeapon("Sword", "R", testWm));
         }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            testWm.UnloadWeapon("R");
+            testWm.UpdateWeaponCollider("R", weaponFact.CreateWeapon("Mace", "R", testWm));
+        }
+
+
     }
 
     /// 

@@ -58,6 +58,29 @@ public class WeaponManager : IActorManagerInterface
         
     }
 
+    public void UnloadWeapon(string side)
+    {
+        if (side == "L")
+        {
+            foreach (Transform trans in whL.transform)
+            {
+                weaponColL = null;
+                wcL.wdata = null;
+                Destroy(trans.gameObject);
+            }
+        }
+        else if (side == "R")
+        {
+            foreach (Transform trans in whR.transform)
+            {
+                weaponColR = null;
+                wcR.wdata = null;
+                Destroy(trans.gameObject);
+            }
+        }
+
+    }
+
     public WeaponController BindWeaponController(GameObject targetObj)
     {
         WeaponController tempWc;
