@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class WeaponData : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float ATK = 5.0f;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         
     }
+
+    
 }
