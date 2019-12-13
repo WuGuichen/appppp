@@ -114,4 +114,9 @@ public class WeaponManager : IActorManagerInterface
     {
         am.SetIsCounterBack(false);
     }
+
+    public void ChangeDualHands(bool dualOn)
+    {
+        am.ChangeDualHands(dualOn);
+    }
 }

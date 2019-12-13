@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
         InitWeaponFactory();
 
         testWm.UpdateWeaponCollider("R", weaponFact.CreateWeapon("Falchion", "R", testWm));
+        testWm.ChangeDualHands(true);
     }
 
     private void OnGUI()
@@ -33,12 +34,14 @@ public class GameManager : MonoBehaviour
         {
             testWm.UnloadWeapon("R");
             testWm.UpdateWeaponCollider("R", weaponFact.CreateWeapon("Sword", "R", testWm));
+            testWm.ChangeDualHands(false);
         }
 
         if (Input.GetKeyDown(KeyCode.P))
         {
             testWm.UnloadWeapon("R");
             testWm.UpdateWeaponCollider("R", weaponFact.CreateWeapon("Mace", "R", testWm));
+            testWm.ChangeDualHands(true);
         }
 
 
