@@ -49,16 +49,23 @@ public class DirectorManager : IActorManagerInterface
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N) && gameObject.layer == LayerMask.NameToLayer("Player"))
-            pd.Play();
+        //if (Input.GetKeyDown(KeyCode.N) && gameObject.layer == LayerMask.NameToLayer("Player"))
+            //pd.Play();
+    }
+
+    public bool IsPlaying()
+    {
+        if (pd.state == PlayState.Playing)
+            return true;
+        else
+            return false;
     }
 
     public void PlayFrontStab(string timelineName, ActorManager attacker, ActorManager victim)
     {
         //if (pd.playableAsset != null)
         //   return;                             //消除连刺
-        if (pd.state == PlayState.Playing)
-            return;
+        
         
         if(timelineName == "frontStab")
         {
