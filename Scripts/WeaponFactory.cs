@@ -46,6 +46,7 @@ public class WeaponFactory
 
 		WeaponData wdata = obj.AddComponent<WeaponData>();
 		wdata.ATK = weaponDB.weaponDataBase[weaponName]["ATK"].f;
+		wc.wdata = wdata;
 
 		return obj.GetComponent<Collider>();
 	}

@@ -24,8 +24,22 @@ public class GameManager : MonoBehaviour
         InitWeaponDB();
         InitWeaponFactory();
 
-        testWm.UpdateWeaponCollider("R", weaponFact.CreateWeapon("Sword", "R", testWm));
+        //testWm.UpdateWeaponCollider("R", weaponFact.CreateWeapon("Sword", "R", testWm));
     }
+
+    private void OnGUI()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            testWm.UpdateWeaponCollider("R", weaponFact.CreateWeapon("Sword", "R", testWm));
+        }
+    }
+
+    /// 
+    /// 
+    /// 
+
+
 
     void Update()
     {

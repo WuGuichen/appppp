@@ -66,10 +66,7 @@ public class Actor_Controller : MonoBehaviour
         {
             camcon.LockUnlock();
         }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        
         if(camcon.lockState == false)
         {
             //anim.SetFloat("forward", pi.Dmag * Mathf.Lerp(anim.GetFloat("forward"),((pi.run) ? runMultiplier : 1.0f), 0.1f));
