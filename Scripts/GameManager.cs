@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    /// <summary>
-    /// Make it a singleton....later
-    /// </summary>
-
     private static GameManager instance;
+    private DataBase weaponDB;
 
 
     
@@ -16,22 +13,26 @@ public class GameManager : MonoBehaviour
     {
         CheckGameObject();
         CheckSingle();
+        InitWeaponDB();
 
         
     }
 
     private void Start()
     {
-        TextAsset myText = Resources.Load("abc") as TextAsset;
-        //print(myText.text);
-        JSONObject abc = new JSONObject(myText.text);
-        print(abc["Sword"]["ATK"].f);
+
     }
 
     void Update()
     {
         
     }
+
+    private void InitWeaponDB()
+    {
+        weaponDB = new DataBase();
+    }
+
     private void CheckSingle()
     {
         if(instance == null)
