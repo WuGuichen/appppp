@@ -2601,6 +2601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98801c701b7b21a47b735e6eb34299ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testWm: {fileID: 0}
 --- !u!4 &1667919079
 Transform:
   m_ObjectHideFlags: 0
@@ -2627,6 +2628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98801c701b7b21a47b735e6eb34299ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testWm: {fileID: 8296172668380505780}
 --- !u!95 &1699766741 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8149483723476108286, guid: 7682e16cd0160c74ca985a995657b146,
@@ -5541,6 +5543,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mace
       objectReference: {fileID: 0}
+    - target: {fileID: 7906136879629076369, guid: 94ea34cd7f66058469b05d7c6698a809,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 547257045790955822, guid: 94ea34cd7f66058469b05d7c6698a809,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7932,6 +7939,16 @@ PrefabInstance:
       propertyPath: lockDot
       value: 
       objectReference: {fileID: 503426682}
+    - target: {fileID: 5007726517127898214, guid: 07b95ce1141f20942b1d9fce8823c586,
+        type: 3}
+      propertyPath: HPMax
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5007726517127898214, guid: 07b95ce1141f20942b1d9fce8823c586,
+        type: 3}
+      propertyPath: HP
+      value: 150
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07b95ce1141f20942b1d9fce8823c586, type: 3}
 --- !u!4 &5010455351029201395
@@ -10874,6 +10891,7 @@ GameObject:
   - component: {fileID: 6036018133040541580}
   - component: {fileID: 6036018133040541581}
   - component: {fileID: 6036018133040541683}
+  - component: {fileID: 8296172668380505780}
   m_Layer: 0
   m_Name: chara180530_2_normalEdited
   m_TagString: Untagged
@@ -10881,6 +10899,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8296172668380505780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296172668380505779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba71f14aee95f8545afb799c0c2e6255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  am: {fileID: 0}
+  weaponColL: {fileID: 0}
+  weaponColR: {fileID: 0}
+  whL: {fileID: 0}
+  whR: {fileID: 0}
+  wcL: {fileID: 0}
+  wcR: {fileID: 0}
 --- !u!1 &8388660854408863686
 GameObject:
   m_ObjectHideFlags: 0
