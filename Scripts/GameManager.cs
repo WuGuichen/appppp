@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
         InitWeaponDB();
         InitWeaponFactory();
 
-        weaponFact.CreateWeapon("Falchion", transform);
+        weaponFact.CreateWeapon("Mace", transform);
     }
 
     void Update()
