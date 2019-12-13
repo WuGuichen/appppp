@@ -16,6 +16,10 @@ public class WeaponFactory
 	{
 		GameObject prefab = Resources.Load(weaponName) as GameObject;
 		GameObject obj = GameObject.Instantiate(prefab, pos, rot);
+
+		WeaponData wdata = obj.AddComponent<WeaponData>();
+		wdata.ATK = weaponDB.weaponDataBase[weaponName]["ATK"].f;
+
 		return obj;
 
 	}
@@ -27,6 +31,10 @@ public class WeaponFactory
 		obj.transform.parent = parent;
 		obj.transform.localPosition = Vector3.zero;
 		obj.transform.localRotation = Quaternion.identity;
+
+		WeaponData wdata = obj.AddComponent<WeaponData>();
+		wdata.ATK = weaponDB.weaponDataBase[weaponName]["ATK"].f;
+
 		return obj;
 	}
 

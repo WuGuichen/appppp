@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 3181803901841347895}
   - component: {fileID: 3181803901840381943}
   - component: {fileID: 3181803901317076321}
-  - component: {fileID: 3181803901317076320}
   m_Layer: 9
-  m_Name: WP_A_0280out
+  m_Name: Falchion
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,16 +94,3 @@ CapsuleCollider:
   m_Height: 1.5235533
   m_Direction: 1
   m_Center: {x: -0.024053518, y: -0.43857253, z: -0.00010008338}
---- !u!114 &3181803901317076320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3181803901838379319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d3d59fc2883d664c9ec36734da70404, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ATK: 20
