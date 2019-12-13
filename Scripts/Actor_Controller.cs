@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class Actor_Controller : MonoBehaviour
 {
     public GameObject model;
-    public GameObject playerDir;
     public CameraController camcon;
     public IUserInputer pi;
     

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: MyPlayableClip
   m_EditorClassIdentifier: 
   template:
-    MyCamera: {fileID: 0}
+    am: {fileID: 0}
     MyFloat: 7777
-  MyCamera:
-    exposedName: 9b1a1c4ad2940a647a7036585af268e8
+  am:
+    exposedName: 11441e7e-9a67-4b67-8039-4e13206538db
     defaultValue: {fileID: 0}
 --- !u!114 &-7304183948837306989
 MonoBehaviour:
@@ -210,7 +210,25 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -237,7 +255,25 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -290,10 +326,10 @@ MonoBehaviour:
   m_Name: MyPlayableClip
   m_EditorClassIdentifier: 
   template:
-    MyCamera: {fileID: 0}
-    MyFloat: 0
-  MyCamera:
-    exposedName: 
+    am: {fileID: 0}
+    MyFloat: 56666
+  am:
+    exposedName: 1c28cc9d-92ab-49bf-9127-82215df763ad
     defaultValue: {fileID: 0}
 --- !u!114 &-2285223743355271814
 MonoBehaviour:
@@ -471,7 +507,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: -9160388414905400380}
-    m_Duration: 6.5
+    m_Duration: 5.366666666666664
     m_TimeScale: 1
     m_ParentTrack: {fileID: 5706457433452936390}
     m_EaseInDuration: 0

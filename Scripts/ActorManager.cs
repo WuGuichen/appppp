@@ -18,7 +18,17 @@ public class ActorManager : MonoBehaviour
     {
         ac = GetComponent<Actor_Controller>();
         GameObject model = ac.model;
-        GameObject sensor = transform.Find("Sensor").gameObject;
+        GameObject sensor = null;
+        try
+        {
+            sensor = transform.Find("Sensor").gameObject;
+
+        }
+        catch (System.Exception ex)
+        {
+
+            
+        }
         
         
         bm = Bind<BattleManager>(sensor);
@@ -49,6 +59,16 @@ public class ActorManager : MonoBehaviour
                         transform.position = im.overlapEcastms[0].am.transform.position + im.overlapEcastms[0].transform.TransformVector(im.overlapEcastms[0].offset);
                         ac.model.transform.LookAt(im.overlapEcastms[0].transform, Vector3.up);
                         dm.PlayFrontStab("openBox", this, im.overlapEcastms[0].am);
+                    }
+                }
+                else if (im.overlapEcastms[0].eventName == "leverUp")
+                {
+                    if (BattleManager.CheckAnglePlayer(ac.model, im.overlapEcastms[0].am.gameObject, 180f))
+                    {
+                        im.overlapEcastms[0].active = false;
+                        transform.position = im.overlapEcastms[0].am.transform.position + im.overlapEcastms[0].transform.TransformVector(im.overlapEcastms[0].offset);
+                        ac.model.transform.LookAt(im.overlapEcastms[0].transform, Vector3.up);
+                        dm.PlayFrontStab("leverUp", this, im.overlapEcastms[0].am);
                     }
                 }
             }
