@@ -24,7 +24,7 @@ public class WeaponFactory
 
 	}
 
-	public bool CreateWeapon(string weaponName, string side, WeaponManager wm)
+	public Collider CreateWeapon(string weaponName, string side, WeaponManager wm)
 	{
 		WeaponController wc;
 		if (side == "L")
@@ -36,7 +36,7 @@ public class WeaponFactory
 			wc = wm.wcR;
 		}
 		else
-			return false;
+			return null;
 
 		GameObject prefab = Resources.Load(weaponName) as GameObject;
 		GameObject obj = GameObject.Instantiate(prefab);
@@ -47,7 +47,7 @@ public class WeaponFactory
 		WeaponData wdata = obj.AddComponent<WeaponData>();
 		wdata.ATK = weaponDB.weaponDataBase[weaponName]["ATK"].f;
 
-		return true;
+		return obj.GetComponent<Collider>();
 	}
 
 }

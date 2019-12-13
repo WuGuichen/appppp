@@ -45,6 +45,19 @@ public class WeaponManager : IActorManagerInterface
         }
     }
 
+    public void UpdateWeaponCollider(string side, Collider col)
+    {
+        if(side == "L")
+        {
+            weaponColL = col;
+        }
+        else if(side == "R")
+        {
+            weaponColR = col;
+        }
+        
+    }
+
     public WeaponController BindWeaponController(GameObject targetObj)
     {
         WeaponController tempWc;
